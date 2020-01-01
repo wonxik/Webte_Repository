@@ -1,5 +1,5 @@
 .krizovatka{
-
+    margin-top: 15px;
     width: 500px;
     height: 500px;
     background-color: white;
@@ -38,6 +38,9 @@ ul.menu{
     padding:0;
     margin-bottom: 0;
 }
+#menu_zvolene{
+    background-color: darkolivegreen;
+}
 
 body{
     background-color: cornflowerblue;
@@ -56,4 +59,8 @@ header{background-color: blue;
 h1{
     margin: 0;
     padding: 0;
+}
+.vyber_div{
+    display: inline-block;
+    margin-left: 15px;
 }
