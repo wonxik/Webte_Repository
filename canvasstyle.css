@@ -1,0 +1,19 @@
+#car1{
+
+}
+#car2,
+#car3,
+#car4,
+#car5 {
+    visibility: hidden;
+    height: 200px;
+    width: 200px;
+    position:absolute;
+    background:
+            url('cars+tram.png') 0px 0px;
+}
+#demo { position:relative;
+    width:700px;
+    height: 700px;
+    overflow: hidden;
+} /* Make this a positioned parent */
