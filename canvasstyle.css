@@ -3,8 +3,9 @@
 }
 #car2,
 #car3,
-#car4,
-#car5 {
+#car4{
+}
+.carss {
     visibility: hidden;
     height: 200px;
     width: 200px;
@@ -16,4 +17,6 @@
     width:700px;
     height: 700px;
     overflow: hidden;
+    padding:0;
+    margin: 0;
 } /* Make this a positioned parent */

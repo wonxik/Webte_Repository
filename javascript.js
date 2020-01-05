@@ -91,11 +91,10 @@ function goleft_down(car,starttop,startleft,endtop,endleft) {
             goleft_down(car, margintop, marginleft, endtop, endleft)
         }, 1);
     else
-        goleftdown(car, endtop, endleft, 90);
+        goleftdown(car, endtop, endleft, 90,0);
 }
-function goleftdown(car,starttop,startleft,angle) {
+function goleftdown(car,starttop,startleft,angle,counter) {
     angle++;
-    console.log(angle);
     var margintop=starttop;
     margintop++;
 
@@ -105,10 +104,10 @@ function goleftdown(car,starttop,startleft,angle) {
     document.getElementById(car).style.marginLeft=marginleft+"px";
     document.getElementById(car).style.marginTop=margintop+"px";
     document.getElementById(car).style.transform=transformm;
-    counterdownright++;
-    if((counterdownright<=90))
+    counter++;
+    if((counter<90))
         setTimeout(function() {
-            goleftdown(car,margintop,marginleft,angle)},15);
+            goleftdown(car,margintop,marginleft,angle,counter)},10);
     else
         gostraigh(car,margintop,marginleft,1000,marginleft);
 }
@@ -133,11 +132,11 @@ function goleft_up(car,starttop,startleft,endtop,endleft) {
             goleft_up(car, margintop, marginleft, endtop, endleft)
         }, 1);
     else
-        goleftup(car, endtop, endleft, 90);
+        goleftup(car, endtop, endleft, 90,0);
 }
-function goleftup(car,starttop,startleft,angle) {
+function goleftup(car,starttop,startleft,angle,counter) {
     angle--;
-    console.log(angle);
+
     var margintop=starttop;
     margintop--;
 
@@ -147,10 +146,10 @@ function goleftup(car,starttop,startleft,angle) {
     document.getElementById(car).style.marginLeft=marginleft+"px";
     document.getElementById(car).style.marginTop=margintop+"px";
     document.getElementById(car).style.transform=transformm;
-    counterdownright++;
-    if((counterdownright<=90))
+    counter++;
+    if((counter<90))
         setTimeout(function() {
-            goleftup(car,margintop,marginleft,angle)},15);
+            goleftup(car,margintop,marginleft,angle,counter)},10);
     else
         gostraigh(car,margintop,marginleft,-500,marginleft);
 }
@@ -175,11 +174,11 @@ function goright_up(car,starttop,startleft,endtop,endleft) {
             goright_up(car, margintop, marginleft, endtop, endleft)
         }, 1);
     else
-        gorightup(car, endtop, endleft, 270);
+        gorightup(car, endtop, endleft, 270,0);
 }
-function gorightup(car,starttop,startleft,angle) {
+function gorightup(car,starttop,startleft,angle,counter) {
     angle++;
-    console.log(angle);
+
     var margintop=starttop;
     margintop--;
 
@@ -189,10 +188,10 @@ function gorightup(car,starttop,startleft,angle) {
     document.getElementById(car).style.marginLeft=marginleft+"px";
     document.getElementById(car).style.marginTop=margintop+"px";
     document.getElementById(car).style.transform=transformm;
-    counterdownright++;
-    if((counterdownright<=90))
+    counter++;
+    if((counter<90))
         setTimeout(function() {
-            gorightup(car,margintop,marginleft,angle)},15);
+            gorightup(car,margintop,marginleft,angle,counter)},10);
     else
         gostraigh(car,margintop,marginleft,-500,marginleft);
 }
@@ -217,11 +216,11 @@ function goright_down(car,starttop,startleft,endtop,endleft) {
             goright_down(car, margintop, marginleft, endtop, endleft)
         }, 1);
     else
-        gorightdown(car, endtop, endleft, 270);
+        gorightdown(car, endtop, endleft, 270,0);
 }
-function gorightdown(car,starttop,startleft,angle) {
+function gorightdown(car,starttop,startleft,angle,counter) {
     angle--;
-    console.log(angle);
+
     var margintop=starttop;
     margintop++;
 
@@ -231,15 +230,15 @@ function gorightdown(car,starttop,startleft,angle) {
     document.getElementById(car).style.marginLeft=marginleft+"px";
     document.getElementById(car).style.marginTop=margintop+"px";
     document.getElementById(car).style.transform=transformm;
-    counterdownright++;
-    if((counterdownright<=90))
+    counter++;
+    if((counter<90))
         setTimeout(function() {
-            gorightdown(car,margintop,marginleft,angle)},15);
+            gorightdown(car,margintop,marginleft,angle,counter)},10);
     else
         gostraigh(car,margintop,marginleft,1000,marginleft);
 }
 
-function gotop_right(car,starttop,startleft,endtop,endleft) {
+function goup_right(car, starttop, startleft, endtop, endleft) {
     var margintop = starttop;
     var marginleft = startleft;
 
@@ -256,14 +255,13 @@ function gotop_right(car,starttop,startleft,endtop,endleft) {
 
     if ((starttop !== endtop) || (startleft !== endleft))
         setTimeout(function () {
-            gotop_right(car, margintop, marginleft, endtop, endleft)
+            goup_right(car, margintop, marginleft, endtop, endleft)
         }, 1);
     else
-        gotopright(car, endtop, endleft, 180);
+        goupright(car, endtop, endleft, 180,0);
 }
-function gotopright(car,starttop,startleft,angle) {
+function goupright(car,starttop,startleft,angle,counter) {
     angle--;
-    console.log(angle);
     var margintop=starttop;
     margintop++;
 
@@ -273,15 +271,15 @@ function gotopright(car,starttop,startleft,angle) {
     document.getElementById(car).style.marginLeft=marginleft+"px";
     document.getElementById(car).style.marginTop=margintop+"px";
     document.getElementById(car).style.transform=transformm;
-    counterdownright++;
-    if((counterdownright<=90))
+    counter++;
+    if((counter<90))
         setTimeout(function() {
-            gotopright(car,margintop,marginleft,angle)},15);
+            goupright(car,margintop,marginleft,angle,counter)},10);
     else
         gostraigh(car,margintop,marginleft,margintop,1050);
 }
 
-function gotop_left(car,starttop,startleft,endtop,endleft) {
+function goup_left(car,starttop,startleft,endtop,endleft) {
     var margintop = starttop;
     var marginleft = startleft;
 
@@ -298,14 +296,14 @@ function gotop_left(car,starttop,startleft,endtop,endleft) {
 
     if ((starttop !== endtop) || (startleft !== endleft))
         setTimeout(function () {
-            gotop_left(car, margintop, marginleft, endtop, endleft)
+            goup_left(car, margintop, marginleft, endtop, endleft)
         }, 1);
     else
-        gotopleft(car, endtop, endleft, 180);
+        goupleft(car, endtop, endleft, 180,0);
 }
-function gotopleft(car,starttop,startleft,angle) {
+function goupleft(car,starttop,startleft,angle,counter) {
     angle++;
-    console.log(angle);
+
     var margintop=starttop;
     margintop++;
 
@@ -315,10 +313,10 @@ function gotopleft(car,starttop,startleft,angle) {
     document.getElementById(car).style.marginLeft=marginleft+"px";
     document.getElementById(car).style.marginTop=margintop+"px";
     document.getElementById(car).style.transform=transformm;
-    counterdownright++;
-    if((counterdownright<=90))
+    counter++;
+    if((counter<90))
         setTimeout(function() {
-            gotopleft(car,margintop,marginleft,angle)},15);
+            goupleft(car,margintop,marginleft,angle,counter)},10);
     else
         gostraigh(car,margintop,marginleft,margintop,-200);
 }
@@ -343,11 +341,11 @@ function godown_left(car,starttop,startleft,endtop,endleft) {
             godown_left(car, margintop, marginleft, endtop, endleft)
         }, 1);
     else
-        godownleft(car, endtop, endleft, 0);
+        godownleft(car, endtop, endleft, 0,0);
 }
-function godownleft(car,starttop,startleft,angle) {
+function godownleft(car,starttop,startleft,angle,counter) {
     angle--;
-    console.log(angle);
+
     var margintop=starttop;
     margintop--;
 
@@ -357,10 +355,10 @@ function godownleft(car,starttop,startleft,angle) {
     document.getElementById(car).style.marginLeft=marginleft+"px";
     document.getElementById(car).style.marginTop=margintop+"px";
     document.getElementById(car).style.transform=transformm;
-    counterdownright++;
-    if((counterdownright<=90))
+    counter++;
+    if((counter<90))
         setTimeout(function() {
-            godownleft(car,margintop,marginleft,angle)},15);
+            godownleft(car,margintop,marginleft,angle,counter)},10);
     else
         gostraigh(car,margintop,marginleft,margintop,-200);
 }
@@ -385,11 +383,11 @@ function godown_right(car,starttop,startleft,endtop,endleft) {
             godown_right(car, margintop, marginleft, endtop, endleft)
         }, 1);
     else
-        godownright(car, endtop, endleft, 0);
+        godownright(car, endtop, endleft, 0,0);
 }
-function godownright(car,starttop,startleft,angle) {
+function godownright(car,starttop,startleft,angle,counter) {
     angle++;
-    console.log(angle);
+
     var margintop=starttop;
     margintop--;
 
@@ -399,10 +397,10 @@ function godownright(car,starttop,startleft,angle) {
     document.getElementById(car).style.marginLeft=marginleft+"px";
     document.getElementById(car).style.marginTop=margintop+"px";
     document.getElementById(car).style.transform=transformm;
-    counterdownright++;
-    if((counterdownright<=90))
+    counter++;
+    if((counter<90))
         setTimeout(function() {
-            godownright(car,margintop,marginleft,angle)},15);
+            godownright(car,margintop,marginleft,angle,counter)},10);
     else
         gostraigh(car,margintop,marginleft,margintop,1200);
 }
@@ -410,14 +408,51 @@ function godownright(car,starttop,startleft,angle) {
      function krizovatky(i) {
 
     if (i === 1) {
-        animateScript(5,size_canvas-100,size_canvas/2,0,1,"car5");
+        /*animespirit(auto ako chcete vzor 0-6 je auto 7 je električka,
+            vzdialenosť od vrchu,
+            vdzialenosť auta odkraja,
+            uhol ako sa ma auto otočiť,
+            smerovka 0-neblika, 1 blika doľava, 2 bliak doprava
+        car1,car2,..... toto su divy v ktorych je uložene autičko ked si pozriete div v canvas.html vidite tam 5 divov s piatimi idčkami
+        (počital som s tym že v križovatke bude max 5 aut )a každemu autičku musite priradiť jeden div aby ho mal každy samostatne
+        a dal sa jednoducho riešiť aj pohyb aut)
+    */
+        animateScript(1,size_canvas/2-50,size_canvas/2-300,90,1,"car1");
+        animateScript(5,size_canvas/2+100,size_canvas/2-50,0,2,"car2");
+        animateScript(0,size_canvas/2-300,size_canvas/2-150,180,1,"car3");
+        animateScript(4,size_canvas/2-150,size_canvas/2+100,270,0,"car4");
 
-        $('#car5').click(function(event) {
+        $('#car1').click(function(event) {
+            //rovno sa cez križovatku sa ide //gostraigh(car,starttop,startleft,endtop,endleft) end left alebo end top treba dať väčšie aby to vyšlo z obrázka
+            //zákruty meno funkcie je go+ odkial:up down right left +kamidete: left up right down,
+            //musí to byť rovná čira takŽe platí endtop==startop alebo endleft==startleft
+            //súradnice sú iba po zákrutu treba si ich napasovať
+
+            goleft_up("car1",size_canvas/2-50,size_canvas/2-300, size_canvas / 2-50, size_canvas/2-125);
+
+        });
+        $('#car2').click(function(event) {
 
             //meno funkcie je go+ odkial:top down right left +kamidete: left top right down,
             //súradnice sú iba po zákrutu treba si ich napasovať
 
-            godown_left("car5", size_canvas , size_canvas/2, size_canvas / 2, size_canvas/2);
+            godown_right("car2", size_canvas/2+100,size_canvas/2-50, size_canvas / 2+40, size_canvas/2-50,);
+
+        });
+        $('#car3').click(function(event) {
+
+            //meno funkcie je go+ odkial:top down right left +kamidete: left top right down,
+            //súradnice sú iba po zákrutu treba si ich napasovať
+
+            goup_right("car3", size_canvas/2-300,size_canvas/2-150, size_canvas / 2-145, size_canvas/2-150);
+
+        });
+        $('#car4').click(function(event) {
+
+            //meno funkcie je go+ odkial:top down right left +kamidete: left top right down,
+            //súradnice sú iba po zákrutu treba si ich napasovať
+
+            gostraigh("car4", size_canvas/2-150,size_canvas/2+100, size_canvas / 2-150, -200);
 
         });
 
