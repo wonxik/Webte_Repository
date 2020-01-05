@@ -2,21 +2,61 @@ var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 var size_canvas = 700;
 var i=1;
+var z=0;
 krizovatky(i);
 var selectedOption = document.getElementById("krizovatky");
 selectedOption.onchange = function() {
      i = Number(selectedOption.value);
     krizovatky(i)};
+var tID;
+/*
+      animespirit(auto ako chcete vzor 0-6 je auto 7 je električka,
+      vzdialenosť od vrchu,
+      vdzialenosť auta odkraja,
+      uhol ako sa ma auto otočiť,
+      smerovka 0-neblika, 1 blika doľava, 2 bliak doprava
+      car1,car2,..... toto su divy v ktorych je uložene autičko ked si pozriete div v canvas.html vidite tam 5 divov s piatimi idčkami
+      (počital som s tym že v križovatke bude max 5 aut )a každemu autičku musite priradiť jeden div aby ho mal každy samostatne
+      a dal sa jednoducho riešiť aj pohyb aut)
+       */
+function animateScript(cars,top,left,angle,blinker,car) {
+    var position=0  ; //start position for the image slicer
+    const  interval = 250; //100 ms of interval for the setInterval()
+    var marginleft=left+"px";
+    var margintop=top+"px";
+    var transformm="rotate("+angle+"deg)";
+    document.getElementById(car).style.visibility="visible";
+    document.getElementById(car).style.transform=transformm;
+    document.getElementById(car).style.marginLeft=marginleft;
+    document.getElementById(car).style.marginTop=margintop;
+    document.getElementById(car).style.backgroundPosition =
+        `-${cars*200}px -0px`;
+    if(blinker===1){
+    tID = setInterval ( () => {
+            document.getElementById(car).style.backgroundPosition =
+                `-${cars*200}px -${position}px`;
+            if (position ===0) {position =200;}
+            else { position = 0;}
+        }
+        , interval );}
+        else if(blinker===2){
+    tID = setInterval ( () => {
+            document.getElementById(car).style.backgroundPosition =
+                `-${cars*200}px -${position}px`;
+            if (position ===0) {position =400;}
+            else { position = 0;}
+        }
+        , interval );}
+}
+
 
      function krizovatky(i) {
-         var img = new Image(); //Creates an HTMLImageElement
-         img.src = "cars+tram.png";
-         img.addEventListener("load", function() {
-         });
+
     if (i === 1) {
-        img.addEventListener("load", function() {
-            ctx.drawImage(img, 256*2, 0,256,256,size_canvas/2-75,size_canvas/2+80,256,256);
-        });
+        animateScript(1,size_canvas/2-50,size_canvas/2-300,90,1,"car1");
+        animateScript(5,size_canvas/2+100,size_canvas/2-50,0,2,"car2");
+        animateScript(0,size_canvas/2-300,size_canvas/2-150,180,1,"car3");
+        animateScript(4,size_canvas/2-150,size_canvas/2+100,270,0,"car4");
 
         ctx.fillStyle = "green";
         ctx.setLineDash([0, 0]);
@@ -485,5 +525,14 @@ selectedOption.onchange = function() {
         ctx.lineWidth=2;
         ctx.strokeStyle = "#000000";
     }
+         /*var img = document.getElementById("car"); //Creates an HTMLImageElement
+         img.style.backgroundPosition =
+             `0px 0px`;
 
-}
+         img.addEventListener("load", function() {
+             // ctx.drawImage(img, 256*2, 0,256,256,size_canvas/2-75,size_canvas/2+80,256,256);
+             //   animateScript(img);
+
+         });*/
+
+     }

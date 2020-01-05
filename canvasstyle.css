@@ -1,6 +1,13 @@
-#image {
-    height: 256px;
-    width: 256px;
+#car1,
+#car2,
+#car3,
+#car4,
+#car5 {
+    visibility: hidden;
+    height: 200px;
+    width: 200px;
+    position:absolute;
     background:
-            url('cars+tram.png');
+            url('cars+tram.png') 0px 0px;
 }
+#demo { position:relative } /* Make this a positioned parent */
