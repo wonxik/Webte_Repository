@@ -14,10 +14,16 @@
     <option id="3krizovatka" value="3" >3</option>
     <option id="4krizovatka" value="4" >4</option>
     <option id="5krizovatka" value="5" >5</option>
+    <option id="6krizovatka" value="6" >6</option>
+    <option id="7krizovatka" value="7" >7</option>
+    <option id="8krizovatka" value="8" >8</option>
+    <option id="9krizovatka" value="9" >9</option>
+    <option id="10krizovatka" value="10" >10</option>
 </select>
 <button id="vyhodnotenie" onclick="kontrola()">vyhodnotenie</button>
 <button id="demo2" onclick="demo()">demo</button>
-<button id="refresh" onclick="krizovatky(i)">refresh</button>
+<button id="refresh" onclick="krizovatky()">refresh</button>
+<button id="vysvetlenie" onclick="vysvetlenie()" >vysvetlenie</button>
 <div id="demo">
   <div id="car1" ></div>
     <div id="car2" ></div>
@@ -25,11 +31,66 @@
     <div id="car4" ></div>
     <div id="car5" ></div>
 
+
 <canvas id="myCanvas" width="700" height="700" style="border:1px solid #000000;">
 </canvas>
 </div>
-
-
+<div id="vysvetlenie 1" class="vysvetlenie">
+    <h1>Vystvetlenie križovatky 1</h1><p>
+    Ako prvé prejde cez križovatku červené auto pretože je na hlavnej ceste a dostáva prednosť pred bielim, ktoré odbočuje na vedľajšiu cestu.
+    V poradí tretie prejde žlté auto, pretože sa uplatňuje pravidlo pravej ruky. Ako posledné prejde čierne auto.
+</p>
+</div>
+<div id="vysvetlenie 2" class="vysvetlenie">
+    <h1>Vystvetlenie križovatky 2</h1><p>
+    Ako prvé prejde žlté auto, pretože je na hlavnej ceste. V poradí druhé prejde červené auto, pretože je takisto na hlavnej ceste.
+    Posledné prejde cez križovatku čierne auto.
+</p>
+</div>
+<div id="vysvetlenie 3" class="vysvetlenie">
+    <h1>Vystvetlenie križovatky 3</h1><p>
+    Žlté auto môže pokračovať nezávisle od ostatných. Červené auto dáva prednosť čiernemu, pretože sa tu uplatňuje pravidlo pravej ruky.
+</p>
+</div>
+<div id="vysvetlenie 4" class="vysvetlenie">
+    <h1>Vystvetlenie križovatky 4</h1><p>
+    Ako prvé prejdú naraz čierne a červené auto, pretože majú zelenú. V poradí tretie prejde biele auto, aj keď má zelenú musí dať
+    prednosť čiernemu autu. Ostatné autá stoja, pretože majú červenú.
+</p>
+</div>
+<div id="vysvetlenie 5" class="vysvetlenie">
+    <h1>Vystvetlenie križovatky 5</h1><p>
+    Červené auto prejde ako prvé, pretože sa tu uplatňuje pravidlo pravej ruky.
+</p>
+</div>
+<div id="vysvetlenie 6" class="vysvetlenie">
+    <h1>Vystvetlenie križovatky 6</h1><p>
+    Električka má prednosť na neoznačenej križovatke takže prejde naraz spolu s bielym autom.
+    Čierne auto dáva prednosť bielemu lebo čierne odbočuje do ľava.
+</p>
+</div>
+<div id="vysvetlenie 7" class="vysvetlenie">
+    <h1>Vystvetlenie križovatky 7</h1><p>
+    Modré auto prejde ako prvé lebo je na hlavnej ceste a pokračuje hlavnou cestou ďalej, zaním prejde kamión,
+    pretože kamión je tiež na hlavnej ceste ale odbočuje do ľava a tak musí dať prednosť v jazde modrému autu,
+    Posledná prejde dodávka lebo ide s vedľajsěj cesty.
+</p>
+</div>
+<div id="vysvetlenie 8" class="vysvetlenie">
+    <h1>Vystvetlenie križovatky 8</h1><p>
+    Ako prvé prejde modré auto lebo odbočuje do prava a čierne auto mu dáva prednošt, lebo čierne odbočuje do ľava. Za modrým autom prejde čierne podľa pravidla pravej ruky. Posledný prejde kamión.
+</p>
+</div>
+<div id="vysvetlenie 9" class="vysvetlenie">
+    <h1>Vystvetlenie križovatky 9</h1><p>
+    Ako prvé prejdú električka spolu s oranžovým autom, pretože električka má prednosť a oranžové auto odbočuje do prava. Červené auto dáva prednosť električke a oranžovému autu lebo odbočuje do ľava.
+</p>
+</div>
+<div id="vysvetlenie 10" class="vysvetlenie">
+    <h1>Vystvetlenie križovatky 10</h1><p>
+    Ako prvé prejde žlté auto lebo je na hlavnej ceste a oranžové auto mu dáva prednosť lebo žlté auto je na pravo. Potom prejdú čierne a oranžové auto, môžu ísť naraz keďze si nekrížia cestu.
+</p>
+</div>
 
 <script  src="javascript.js"></script>
 </body>

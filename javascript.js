@@ -12,7 +12,13 @@ var krizovatka1=[
     ["car2","car3","car1"],
     ["car2","car1","car3"],
     ["car1","car3","car2"],
-    ["car2","car1"]
+    ["car2","car1"],
+    ["car1","car3","car4"],
+    ["car2","car1","car3"],
+    ["car2","car3","car1"],
+    ["car1","car4","car3"],
+    ["car2","car3","car1"]
+
 
 ];
 //toto je len preto ked su dve odpovede spravne tak tu nahravame druhu
@@ -21,14 +27,39 @@ var krizovatka2=[
     ["car6"],
     ["car1","car2","car3"],
     ["car3","car1","car2"],
+    ["car6"],
+    ["car3","car1","car4"],
+    ["car6"],
+    ["car6"],
+    ["car4","car1","car3"],
+    ["car2","car1","car3"]
+
+
+];
+var krizovatka3=[
+    ["car6"],
+    ["car6"],
+    ["car1","car3","car2"],
+    ["car6"],
+    ["car6"],
+    ["car6"],
+    ["car6"],
+    ["car6"],
+    ["car6"],
     ["car6"]
+
 
 ];
 //do tochto pola sa ukladaju odpovede ako sme ich poklikali
 var krizovatka=[];
 krizovatky(i);
 
+function vysvetlenie() {
 
+    var x=document.getElementById('vysvetlenie '+i.toString());
+    x.style.display="inline";
+
+}
 var selectedOption = document.getElementById("krizovatky");
 selectedOption.onchange = function() {
     i = Number(selectedOption.value);
@@ -73,7 +104,7 @@ function demo() {
         , 1500));}
 
 function kontrola(){
-    if(JSON.stringify(krizovatka1[i-1])===JSON.stringify(krizovatka) || JSON.stringify(krizovatka2[i-1])===JSON.stringify(krizovatka))
+    if(JSON.stringify(krizovatka1[i-1])===JSON.stringify(krizovatka) || JSON.stringify(krizovatka2[i-1])===JSON.stringify(krizovatka) ||JSON.stringify(krizovatka3[i-1])===JSON.stringify(krizovatka))
     {
         alert("riešenie je správne");
     }
@@ -82,7 +113,7 @@ function kontrola(){
     }
 
 }
-function krizovatky(i) {
+function krizovatky() {
     tID2.forEach( clearInterval );
     k=0;
     $("#car1").off("click");
@@ -98,6 +129,11 @@ function krizovatky(i) {
     document.getElementById("car3").style.visibility="hidden";
     document.getElementById("car4").style.visibility="hidden";
     document.getElementById("car5").style.visibility="hidden";
+    //schovanie  vysvetleni
+    var u=document.getElementsByClassName('vysvetlenie');
+    for (x=0;x<u.length;x++){
+        u[x].style.display="none"
+    }
     if (i === 1) {
         animateScript(1,size_canvas/2-50,size_canvas/2-300,90,1,"car1");
         animateScript(5,size_canvas/2+100,size_canvas/2-50,0,0,"car2");
@@ -732,14 +768,594 @@ function krizovatky(i) {
         ctx.strokeStyle="#000000";
         ctx.lineWidth = 2;
     }
+    else if(i===6) {
+        animateScript(7,size_canvas/2-44,size_canvas/2-340,90,0,"car1");
+        animateScript(7,size_canvas/2-154,size_canvas/2+140,270,0,"car2");
+        animateScript(4,size_canvas/2+60,20,90,0,"car3");
+        animateScript(1,size_canvas/2-270,size_canvas-200,270,1,"car4");
+
+
+        $('#car1').on("click",function(event) {
+            gostraigh("car1", size_canvas/2-44,size_canvas/2-340, size_canvas/2-44, size_canvas+200,);
+            gostraigh("car2", size_canvas/2-154,size_canvas/2+140, size_canvas/2-154, -200,);
+            krizovatka.push("car1");
+            $("#car1").off("click");
+            $("#car2").off("click");
+        });
+        $('#car2').on("click",function(event) {
+            gostraigh("car1", size_canvas/2-44,size_canvas/2-340, size_canvas/2-44, size_canvas+200,);
+            gostraigh("car2", size_canvas/2-154,size_canvas/2+140, size_canvas/2-154, -200,);
+            krizovatka.push("car1");
+            $("#car1").off("click");
+            $("#car2").off("click");
+        });
+
+        $('#car3').on("click",function(event) {
+            gostraigh("car3",size_canvas/2+60,20, size_canvas/2+60, size_canvas+200);
+            $("#car3").off("click");
+            krizovatka.push("car3");
+        });
+        $('#car4').on("click",function(event) {
+            goright_down("car4",size_canvas/2-270,size_canvas-200, size_canvas/2-270, size_canvas/2-60);
+            $("#car4").off("click");
+            krizovatka.push("car4");
+        });
+        //2 cesty + pozadie
+        ctx.fillStyle = "green";
+        ctx.setLineDash([0, 0]);
+        ctx.strokeStyle = "#000000";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#585759";//cesta pre cyklistov
+        ctx.lineWidth = 2;
+        ctx.fillRect(size_canvas / 2 - 105, size_canvas/2, 210, size_canvas/2);
+        ctx.fillRect(0, size_canvas / 2 - 210, size_canvas, 210);
+        ctx.fillRect(0, size_canvas / 2 , size_canvas, 210);
+        ctx.fillStyle = "yellow";
+        ctx.fillRect(0 , 50, size_canvas, 60);
+        ctx.fillStyle = "#585759";
+        ctx.fillRect(0 , 60, size_canvas, 40);
+        ctx.beginPath();
+
+        //ciary
+        ctx.strokeStyle = "#FFFFFF";
+        ctx.moveTo(0, size_canvas / 2-100);
+        ctx.lineTo(size_canvas / 2 - 100, size_canvas / 2-100);
+        ctx.moveTo(size_canvas /2 + 100, size_canvas / 2-100);
+        ctx.lineTo(size_canvas , size_canvas / 2-100);
+        ctx.moveTo(0, size_canvas / 2+100);
+        ctx.lineTo(size_canvas / 2 - 100, size_canvas / 2+100);
+
+        ctx.moveTo(size_canvas /2 + 100, size_canvas / 2+100);
+        ctx.lineTo(size_canvas , size_canvas / 2+100);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.setLineDash([20, 30]);
+        ctx.moveTo(size_canvas / 2, size_canvas / 2+220);
+        ctx.lineTo(size_canvas / 2, size_canvas );
+        ctx.moveTo(0,80);
+        ctx.lineTo(size_canvas,80);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.setLineDash([0, 0]);
+        ctx.fillStyle = "#000000"; //elektricky
+        ctx.strokeStyle = "#000000";
+        ctx.moveTo(0, size_canvas / 2+85);
+        ctx.lineTo(size_canvas , size_canvas / 2+85);
+        ctx.moveTo(0, size_canvas / 2+15);
+        ctx.lineTo(size_canvas , size_canvas / 2+15);
+        ctx.moveTo(0, size_canvas / 2-85);
+        ctx.lineTo(size_canvas , size_canvas / 2-85);
+        ctx.moveTo(0, size_canvas / 2-15);
+        ctx.lineTo(size_canvas , size_canvas / 2-15);
+
+        ctx.moveTo(0, size_canvas / 2-85);
+        ctx.lineTo(size_canvas , size_canvas / 2-85);
+        ctx.moveTo(0, size_canvas / 2-15);
+        ctx.lineTo(size_canvas , size_canvas / 2-15);
+        ctx.stroke();
+
+
+
+
+    }
+    else if(i===7) {
+        animateScript(6,size_canvas/2-44,size_canvas/2-340,90,1,"car1");
+        animateScript(3,size_canvas/2-154,size_canvas/2+140,270,0,"car2");
+        animateScript(4,size_canvas-180,size_canvas/2-50,0,0,"car3");
+
+
+
+        $('#car1').on("click",function(event) {
+            goleft_up("car1", size_canvas/2-44,size_canvas/2-340, size_canvas/2-44, size_canvas/2-120,);
+            krizovatka.push("car1");
+            $("#car1").off("click");
+
+        });
+        $('#car2').on("click",function(event) {
+            gostraigh("car2", size_canvas/2-154,size_canvas/2+140, size_canvas/2-154, -200,);
+            krizovatka.push("car2");
+            $("#car2").off("click");
+        });
+
+        $('#car3').on("click",function(event) {
+            gostraigh("car3",size_canvas-180,size_canvas/2-50, -200,size_canvas/2-50,);
+            krizovatka.push("car3");
+            $("#car3").off("click");
+        });
+
+
+        //2 cesty
+        ctx.fillStyle = "green";
+        ctx.setLineDash([0, 0]);
+        ctx.strokeStyle = "#000000";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#585759";
+        ctx.lineWidth = 2;
+        ctx.fillRect(size_canvas / 2 - 105, 0, 210, size_canvas);
+        ctx.fillRect(0, size_canvas / 2 - 105, size_canvas, 210);
+        ctx.beginPath();
+        //plne ciary
+        ctx.fillStyle = "#FFFFFF";
+        //dlha
+        ctx.fillRect(size_canvas / 2, 0, 4, size_canvas / 2 - 100);
+        //kratka
+        ctx.fillRect(size_canvas / 2 - 100, size_canvas / 2 - 104, 100, 4);
+        ctx.fillRect(size_canvas / 2, size_canvas / 2+100, 4, size_canvas);
+        ctx.fillRect(size_canvas / 2 , size_canvas / 2+100, 100, 4);
+        ctx.beginPath();
+        //prerusovane ciary
+        ctx.strokeStyle = "#FFFFFF";
+        ctx.setLineDash([20, 30]);
+        ctx.moveTo(0, size_canvas/2);
+        ctx.lineTo(size_canvas / 2-100, size_canvas / 2 );
+        ctx.moveTo(size_canvas / 2 + 100, size_canvas / 2);
+        ctx.lineTo(size_canvas, size_canvas / 2);
+        ctx.stroke();
+        //znacka
+        ctx.beginPath();
+        ctx.fillStyle = "#ff4125";
+        ctx.moveTo(size_canvas / 2 + 110, size_canvas / 2 + 110);
+        ctx.lineTo(size_canvas / 2 + 160, size_canvas / 2 + 110);
+        ctx.lineTo(size_canvas / 2 + 135, size_canvas / 2 + 160);
+        ctx.lineTo(size_canvas / 2 + 110, size_canvas / 2 + 110);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.fillStyle = "#FFFFFF";
+        ctx.moveTo(size_canvas / 2 + 120, size_canvas / 2 + 115);
+        ctx.lineTo(size_canvas / 2 + 150, size_canvas / 2 + 115);
+        ctx.lineTo(size_canvas / 2 + 135, size_canvas / 2 + 148);
+        ctx.lineTo(size_canvas / 2 + 120, size_canvas / 2 + 115);
+        ctx.fill();
+    //znacka
+        ctx.beginPath();
+        ctx.fillStyle = "#ff4125";
+        ctx.moveTo(size_canvas / 2 - 110, size_canvas / 2 - 110);
+        ctx.lineTo(size_canvas / 2 - 135, size_canvas / 2 - 160);
+        ctx.lineTo(size_canvas / 2 - 160, size_canvas / 2 - 110);
+        ctx.lineTo(size_canvas / 2 - 110, size_canvas / 2 - 110);
+        ctx.fill();
+
+
+        ctx.beginPath();
+        ctx.fillStyle = "#FFFFFF";
+        ctx.moveTo(size_canvas / 2 - 152, size_canvas / 2 - 115);
+        ctx.lineTo(size_canvas / 2 - 135, size_canvas / 2 - 150);
+        ctx.lineTo(size_canvas / 2 - 118, size_canvas / 2 - 115);
+        ctx.lineTo(size_canvas / 2 - 152, size_canvas / 2 - 115);
+        ctx.fill();
+/////////////////////////////////////////
+        ctx.setLineDash([0, 0]);
+        ctx.strokeStyle = "#000000";
+        //znacka
+        ctx.beginPath();
+        ctx.fillStyle = "#FFFFFF";
+        ctx.moveTo(size_canvas / 2 + 135, size_canvas / 2 - 160);
+        ctx.lineTo(size_canvas / 2 + 160, size_canvas / 2 - 135);
+        ctx.lineTo(size_canvas / 2 + 135, size_canvas / 2 - 110);
+        ctx.lineTo(size_canvas / 2 + 110, size_canvas / 2 - 135);
+        ctx.lineTo(size_canvas / 2 + 135, size_canvas / 2 - 160);
+        ctx.stroke();
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.fillStyle = "#fff63f";
+        ctx.moveTo(size_canvas / 2 + 135, size_canvas / 2 - 150);
+        ctx.lineTo(size_canvas / 2 + 150, size_canvas / 2 - 135);
+        ctx.lineTo(size_canvas / 2 + 135, size_canvas / 2 - 120);
+        ctx.lineTo(size_canvas / 2 + 120, size_canvas / 2 - 135);
+        ctx.lineTo(size_canvas / 2 + 135, size_canvas / 2 - 150);
+        ctx.stroke();
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.fillStyle = "#000000";
+        ctx.moveTo(size_canvas / 2 + 160, size_canvas / 2 - 110);
+        ctx.lineTo(size_canvas / 2 + 160, size_canvas / 2 - 160);
+        ctx.lineTo(size_canvas / 2 + 210, size_canvas / 2 - 160);
+        ctx.lineTo(size_canvas / 2 + 210, size_canvas / 2 - 110);
+        ctx.lineTo(size_canvas / 2 + 160, size_canvas / 2 - 110);
+        ctx.moveTo(size_canvas / 2 + 165, size_canvas / 2 - 125);
+        ctx.stroke();
+        ctx.fillStyle = "white";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.lineWidth = 5;
+        ctx.moveTo(size_canvas / 2 + 205, size_canvas / 2 - 135);
+        ctx.lineTo(size_canvas / 2 + 165, size_canvas / 2 - 135);
+        ctx.stroke();
+
+        ctx.lineWidth = 2;
+        ctx.moveTo(size_canvas / 2 + 185, size_canvas / 2 - 155);
+        ctx.lineTo(size_canvas / 2 + 185, size_canvas / 2 - 140);
+        ctx.moveTo(size_canvas / 2 + 185, size_canvas / 2 - 130);
+        ctx.lineTo(size_canvas / 2 + 185, size_canvas / 2 - 115);
+        ctx.stroke();
+        //znacka
+        ctx.beginPath();
+        ctx.fillStyle = "#FFFFFF";
+        ctx.moveTo(size_canvas / 2 - 135, size_canvas / 2 + 160);
+        ctx.lineTo(size_canvas / 2 - 160, size_canvas / 2 + 135);
+        ctx.lineTo(size_canvas / 2 - 135, size_canvas / 2 + 110);
+        ctx.lineTo(size_canvas / 2 - 110, size_canvas / 2 + 135);
+        ctx.lineTo(size_canvas / 2 - 135, size_canvas / 2 + 160);
+        ctx.stroke();
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.fillStyle = "#fff63f";
+        ctx.moveTo(size_canvas / 2 - 135, size_canvas / 2 + 150);
+        ctx.lineTo(size_canvas / 2 - 150, size_canvas / 2 + 135);
+        ctx.lineTo(size_canvas / 2 - 135, size_canvas / 2 + 120);
+        ctx.lineTo(size_canvas / 2 - 120, size_canvas / 2 + 135);
+        ctx.lineTo(size_canvas / 2 - 135, size_canvas / 2 + 150);
+        ctx.stroke();
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.fillStyle = "#000000";
+        ctx.moveTo(size_canvas / 2 - 160, size_canvas / 2 + 110);
+        ctx.lineTo(size_canvas / 2 - 160, size_canvas / 2 + 160);
+        ctx.lineTo(size_canvas / 2 - 210, size_canvas / 2 + 160);
+        ctx.lineTo(size_canvas / 2 - 210, size_canvas / 2 + 110);
+        ctx.lineTo(size_canvas / 2 - 160, size_canvas / 2 + 110);
+        ctx.moveTo(size_canvas / 2 - 165, size_canvas / 2 + 125);
+        ctx.stroke();
+        ctx.fillStyle = "white";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.lineWidth = 5;
+        ctx.moveTo(size_canvas / 2 - 205, size_canvas / 2 + 135);
+        ctx.lineTo(size_canvas / 2 - 165, size_canvas / 2 + 135);
+        ctx.stroke();
+
+        ctx.lineWidth = 2;
+        ctx.moveTo(size_canvas / 2 - 185, size_canvas / 2 + 155);
+        ctx.lineTo(size_canvas / 2 - 185, size_canvas / 2 + 140);
+        ctx.moveTo(size_canvas / 2 - 185, size_canvas / 2 + 130);
+        ctx.lineTo(size_canvas / 2 - 185, size_canvas / 2 + 115);
+
+        ctx.stroke();}
+    else if(i===8) {
+        animateScript(6,size_canvas/2-44,size_canvas/2-340,90,1,"car1");
+        animateScript(3,0,size_canvas/2-150,180,2,"car2");
+        animateScript(1,size_canvas-200,size_canvas/2-50,0,1,"car3");
+
+
+
+        $('#car1').on("click",function(event) {
+            goleft_up("car1", size_canvas/2-44,size_canvas/2-340, size_canvas/2-44, size_canvas/2-120,);
+            krizovatka.push("car1");
+            $("#car1").off("click");
+
+        });
+        $('#car2').on("click",function(event) {
+            goup_left("car2", 0,size_canvas/2-150, size_canvas/2-250,size_canvas/2-150,);
+            krizovatka.push("car2");
+            $("#car2").off("click");
+        });
+
+        $('#car3').on("click",function(event) {
+            godown_left("car3",size_canvas-200,size_canvas/2-50, size_canvas/2-80,size_canvas/2-50,);
+            krizovatka.push("car3");
+            $("#car3").off("click");
+        });
+
+        //2 cesty +pozadie
+        ctx.fillStyle = "green";
+        ctx.setLineDash([0, 0]);
+        ctx.strokeStyle = "#000000";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#585759";
+        ctx.lineWidth = 2;
+        ctx.fillRect(size_canvas / 2 - 105, 0, 210, size_canvas);
+        ctx.fillRect(0, size_canvas / 2 - 105, size_canvas, 210);
+
+
+        //prerusovane ciary
+        ctx.strokeStyle = "#FFFFFF";
+        ctx.setLineDash([20, 30]);
+        ctx.beginPath();
+        ctx.moveTo(0, size_canvas / 2);
+        ctx.lineTo(size_canvas / 2 - 100, size_canvas / 2);
+        ctx.moveTo(size_canvas / 2 + 100, size_canvas / 2);
+        ctx.lineTo(size_canvas, size_canvas / 2);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(size_canvas / 2, size_canvas);
+        ctx.lineTo(size_canvas/2, size_canvas / 2+100);
+        ctx.moveTo(size_canvas / 2, size_canvas/2-100);
+        ctx.lineTo(size_canvas/2 , 0 );
+        ctx.stroke();
+
+    }
+
+    else if(i===9) {
+        animateScript(7,size_canvas/2-44,size_canvas/2-340,90,0,"car1");
+        animateScript(7,size_canvas/2-154,size_canvas/2+140,270,0,"car2");
+        animateScript(0,size_canvas/2+44,size_canvas/2-340,90,1,"car3");
+        animateScript(2,size_canvas/2-250,size_canvas-200,270,2,"car4");
+        $('#car1').on("click",function(event) {
+            gostraigh("car1", size_canvas/2-44,size_canvas/2-340, size_canvas/2-44, size_canvas+200,);
+            gostraigh("car2", size_canvas/2-154,size_canvas/2+140, size_canvas/2-154, -200,);
+            krizovatka.push("car1");
+            $("#car1").off("click");
+            $("#car2").off("click");
+        });
+        $('#car2').on("click",function(event) {
+            gostraigh("car1", size_canvas/2-44,size_canvas/2-340, size_canvas/2-44, size_canvas+200,);
+            gostraigh("car2", size_canvas/2-154,size_canvas/2+140, size_canvas/2-154, -200,);
+            krizovatka.push("car1");
+            $("#car1").off("click");
+            $("#car2").off("click");
+        });
+        $('#car3').on("click",function(event) {
+            goleft_up("car3", size_canvas/2+44,size_canvas/2-340, size_canvas/2+44, size_canvas/2-130,);
+            krizovatka.push("car3");
+            $("#car3").off("click");
+
+        });
+        $('#car4').on("click",function(event) {
+            goright_up("car4", size_canvas/2-250,size_canvas-200, size_canvas/2-250, size_canvas/2+40,);
+            krizovatka.push("car4");
+            $("#car4").off("click");
+        });
+        //2 cesty
+        ctx.fillStyle = "green";
+        ctx.setLineDash([0, 0]);
+        ctx.strokeStyle = "#000000";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#585759";
+        ctx.lineWidth = 2;
+        ctx.fillRect(size_canvas / 2 - 105, 0, 210, size_canvas/2);
+        ctx.fillRect(0, size_canvas / 2 - 210, size_canvas, 210);
+        ctx.fillRect(0, size_canvas / 2 , size_canvas, 210);
+        ctx.beginPath();
+
+
+        ctx.strokeStyle = "#FFFFFF";
+        ctx.moveTo(0, size_canvas / 2-100);
+        ctx.lineTo(size_canvas / 2 - 100, size_canvas / 2-100);
+        ctx.moveTo(size_canvas /2 + 100, size_canvas / 2-100);
+        ctx.lineTo(size_canvas , size_canvas / 2-100);
+        ctx.moveTo(0, size_canvas / 2+100);
+        ctx.lineTo(size_canvas / 2 - 100, size_canvas / 2+100);
+
+        ctx.moveTo(size_canvas /2 + 100, size_canvas / 2+100);
+        ctx.lineTo(size_canvas , size_canvas / 2+100);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.setLineDash([20, 30]);
+        ctx.moveTo(size_canvas / 2, 0);
+        ctx.lineTo(size_canvas / 2, size_canvas / 2-220);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.setLineDash([0, 0]);
+        ctx.fillStyle = "#000000";
+        ctx.strokeStyle = "#000000";
+        //elektrickove ciary
+        ctx.moveTo(0, size_canvas / 2+85);
+        ctx.lineTo(size_canvas , size_canvas / 2+85);
+        ctx.moveTo(0, size_canvas / 2+15);
+        ctx.lineTo(size_canvas , size_canvas / 2+15);
+        ctx.moveTo(0, size_canvas / 2-85);
+        ctx.lineTo(size_canvas , size_canvas / 2-85);
+        ctx.moveTo(0, size_canvas / 2-15);
+        ctx.lineTo(size_canvas , size_canvas / 2-15);
+
+        ctx.moveTo(0, size_canvas / 2-85);
+        ctx.lineTo(size_canvas , size_canvas / 2-85);
+        ctx.moveTo(0, size_canvas / 2-15);
+        ctx.lineTo(size_canvas , size_canvas / 2-15);
+        ctx.stroke();
+
+
+
+
+    }
+    else if(i===10) {
+        animateScript(1,0,size_canvas/2-150,180,2,"car1");
+        animateScript(5,size_canvas/2-154,size_canvas/2+140,270,0,"car2");
+        animateScript(2,size_canvas-200,size_canvas/2-50,0,0,"car3");
+        $('#car1').on("click",function(event) {
+            goup_left("car1", 0,size_canvas/2-150, size_canvas/2-250,size_canvas/2-150,);
+            krizovatka.push("car1");
+            $("#car1").off("click");
+        });
+        $('#car2').on("click",function(event) {
+            gostraigh("car2", size_canvas/2-154,size_canvas/2+140, size_canvas/2-154, -200,);
+            krizovatka.push("car2");
+            $("#car2").off("click");
+        });
+
+        $('#car3').on("click",function(event) {
+            gostraigh("car3",size_canvas-200,size_canvas/2-50, -200,size_canvas/2-50,);
+            krizovatka.push("car3");
+            $("#car3").off("click");
+        });
+        //2 cesty
+        ctx.fillStyle = "green";
+        ctx.setLineDash([0, 0]);
+        ctx.strokeStyle="#000000";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#585759";
+        ctx.lineWidth = 2;
+        ctx.fillRect(size_canvas / 2 - 105, 0, 210, size_canvas);
+        ctx.fillRect(0, size_canvas / 2 - 105, size_canvas, 210);
+        ctx.beginPath();
+        //plne ciary
+        ctx.fillStyle = "#FFFFFF";
+        //dlha
+        ctx.fillRect(size_canvas/2, 0 , 4, size_canvas / 2-100);
+        //kratka
+        ctx.fillRect(size_canvas / 2-100, size_canvas/2-104, 100, 4);
+        ctx.fillRect(0, size_canvas / 2, size_canvas / 2 - 100, 4);
+        ctx.fillRect(size_canvas / 2 - 100, size_canvas / 2, 4, 100);
+        ctx.beginPath();
+        //prerusovane ciary
+        ctx.strokeStyle = "#FFFFFF";
+        ctx.setLineDash([20, 30]);
+        ctx.moveTo(size_canvas / 2, size_canvas);
+        ctx.lineTo(size_canvas/2, size_canvas / 2+100);
+        ctx.moveTo(size_canvas / 2+100, size_canvas/2);
+        ctx.lineTo(size_canvas , size_canvas/2 );
+        ctx.stroke();
+        //znacka
+        ctx.beginPath();
+        ctx.fillStyle = "#ff4125";
+        ctx.moveTo(size_canvas / 2 - 110, size_canvas / 2 + 110);
+        ctx.lineTo(size_canvas / 2 - 160, size_canvas / 2 + 135);
+        ctx.lineTo(size_canvas / 2 - 110, size_canvas / 2 + 160);
+        ctx.lineTo(size_canvas / 2 - 110, size_canvas / 2 + 110);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.fillStyle = "#FFFFFF";
+        ctx.moveTo(size_canvas / 2 - 115, size_canvas / 2 + 118);
+        ctx.lineTo(size_canvas / 2 - 150, size_canvas / 2 + 135);
+        ctx.lineTo(size_canvas / 2 - 115, size_canvas / 2 + 152);
+        ctx.lineTo(size_canvas / 2 - 115, size_canvas / 2 + 118);
+        ctx.fill();
+        //znacka
+        ctx.beginPath();
+        ctx.fillStyle = "#ff4125";
+        ctx.moveTo(size_canvas / 2 - 110, size_canvas / 2 - 110);
+        ctx.lineTo(size_canvas / 2 - 135, size_canvas / 2 - 160);
+        ctx.lineTo(size_canvas / 2 - 160, size_canvas / 2 - 110);
+        ctx.lineTo(size_canvas / 2 - 110, size_canvas / 2 - 110);
+        ctx.fill();
+
+
+        ctx.beginPath();
+        ctx.fillStyle = "#FFFFFF";
+        ctx.moveTo(size_canvas / 2 - 152, size_canvas / 2 - 115);
+        ctx.lineTo(size_canvas / 2- 135, size_canvas / 2 -150);
+        ctx.lineTo(size_canvas / 2 - 118, size_canvas / 2 - 115);
+        ctx.lineTo(size_canvas / 2 - 152, size_canvas / 2  -115);
+        ctx.fill();
+/////////////////////////////////////////
+        ctx.setLineDash([0, 0]);
+        ctx.strokeStyle="#000000";
+        //znacka
+        ctx.beginPath();
+        ctx.fillStyle = "#FFFFFF";
+        ctx.moveTo(size_canvas / 2 + 135, size_canvas / 2 - 160);
+        ctx.lineTo(size_canvas / 2 + 160, size_canvas / 2 - 135);
+        ctx.lineTo(size_canvas / 2 + 135, size_canvas / 2 - 110);
+        ctx.lineTo(size_canvas / 2 + 110, size_canvas / 2 - 135);
+        ctx.lineTo(size_canvas / 2 + 135, size_canvas / 2 - 160);
+        ctx.stroke();
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.fillStyle = "#fff63f";
+        ctx.moveTo(size_canvas / 2 + 135, size_canvas / 2 - 150);
+        ctx.lineTo(size_canvas / 2 + 150, size_canvas / 2 - 135);
+        ctx.lineTo(size_canvas / 2 + 135, size_canvas / 2 - 120);
+        ctx.lineTo(size_canvas / 2 + 120, size_canvas / 2 - 135);
+        ctx.lineTo(size_canvas / 2 + 135, size_canvas / 2 - 150);
+        ctx.stroke();
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.fillStyle = "#000000";
+        ctx.moveTo(size_canvas / 2 + 160, size_canvas / 2 - 110);
+        ctx.lineTo(size_canvas / 2 + 160, size_canvas / 2 - 160);
+        ctx.lineTo(size_canvas / 2 + 210, size_canvas / 2 - 160);
+        ctx.lineTo(size_canvas / 2 + 210, size_canvas / 2 - 110);
+        ctx.lineTo(size_canvas / 2 + 160, size_canvas / 2 - 110);
+        ctx.moveTo(size_canvas / 2 + 165, size_canvas / 2 - 125);
+        ctx.stroke();
+        ctx.fillStyle = "white";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.lineWidth = 4;
+        ctx.moveTo(size_canvas / 2 + 205, size_canvas / 2 - 135);
+        ctx.quadraticCurveTo(size_canvas / 2 + 180, size_canvas / 2 - 135, size_canvas / 2 + 180, size_canvas / 2 - 115);
+        ctx.stroke();
+        ctx.lineWidth = 2;
+        ctx.moveTo(size_canvas / 2 + 185, size_canvas / 2 - 155);
+        ctx.lineTo(size_canvas / 2 + 185, size_canvas / 2 - 140);
+        ctx.moveTo(size_canvas / 2 + 180, size_canvas / 2 - 135);
+        ctx.lineTo(size_canvas / 2 + 165, size_canvas / 2 - 135);
+        ctx.stroke();
+        //znacka
+        ctx.beginPath();
+        ctx.fillStyle = "#FFFFFF";
+        ctx.moveTo(size_canvas / 2 + 135, size_canvas / 2 + 160);
+        ctx.lineTo(size_canvas / 2 + 160, size_canvas / 2 + 135);
+        ctx.lineTo(size_canvas / 2 + 135, size_canvas / 2 + 110);
+        ctx.lineTo(size_canvas / 2 + 110, size_canvas / 2 + 135);
+        ctx.lineTo(size_canvas / 2 + 135, size_canvas / 2 + 160);
+        ctx.stroke();
+        ctx.fill();
+        ctx.beginPath();
+        ctx.fillStyle = "#fff63f";
+        ctx.moveTo(size_canvas / 2 + 135, size_canvas / 2 + 150);
+        ctx.lineTo(size_canvas / 2 + 150, size_canvas / 2 + 135);
+        ctx.lineTo(size_canvas / 2 + 135, size_canvas / 2 + 120);
+        ctx.lineTo(size_canvas / 2 + 120, size_canvas / 2 + 135);
+        ctx.lineTo(size_canvas / 2 + 135, size_canvas / 2 + 150);
+        ctx.stroke();
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.fillStyle = "#000000";
+        ctx.moveTo(size_canvas / 2 + 110, size_canvas / 2 + 160);
+        ctx.lineTo(size_canvas / 2 + 110, size_canvas / 2 + 210);
+        ctx.lineTo(size_canvas / 2 + 160, size_canvas / 2 + 210);
+        ctx.lineTo(size_canvas / 2 + 160, size_canvas / 2 + 160);
+        ctx.lineTo(size_canvas / 2 + 110, size_canvas / 2 + 160);
+        ctx.moveTo(size_canvas / 2 + 115, size_canvas / 2 + 175);
+        ctx.stroke();
+        ctx.fillStyle = "white";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.lineWidth = 4;
+        ctx.moveTo(size_canvas / 2 + 155, size_canvas / 2 + 185);
+        ctx.quadraticCurveTo(size_canvas / 2 + 135, size_canvas / 2 + 185, size_canvas / 2 + 135 , size_canvas / 2 + 205);
+        ctx.stroke();
+        ctx.lineWidth = 2;
+        ctx.moveTo(size_canvas / 2 + 135, size_canvas / 2 + 180);
+        ctx.lineTo(size_canvas / 2 + 135, size_canvas / 2 + 165);
+        ctx.moveTo(size_canvas / 2 + 130, size_canvas / 2 + 185);
+        ctx.lineTo(size_canvas / 2 + 115, size_canvas / 2 + 185);
+        ctx.stroke();
+    }
 }
 
-// STEVO
-function gostraigh(car,starttop,startleft,endtop,endleft) {
+//  pohyb je cez funkcie len z pomlckou + go straigh -bez pomlcky sú len pomocné
+//rovno odkial kam
+function gostraigh(car,starttop,startleft,endtop,endleft) { //chceme ist rovno
     var margintop = starttop;
     var marginleft = startleft;
 
-    if (starttop < endtop)
+    if (starttop < endtop)  //zvecsuje alebo zmensujeme marginleft a top podla toho kam ideme a kde sme a tym sa posuvame
         margintop++;
     else if (starttop > endtop)
         margintop--;
@@ -750,15 +1366,16 @@ function gostraigh(car,starttop,startleft,endtop,endleft) {
     document.getElementById(car).style.marginLeft = marginleft + "px";
     document.getElementById(car).style.marginTop = margintop + "px";
 
-    if ((starttop !== endtop) || (startleft !== endleft))
+    if ((starttop !== endtop) || (startleft !== endleft))//znovu voláme samých seba ak kontrolujeme či tam už nie sme timeout na 1 milisecundu aby sme videli animáciu
         timeOutVar.push (setTimeout(function () {
             gostraigh(car, margintop, marginleft, endtop, endleft)
         }, 1));
 
 }
-
-function goleft_down(car,starttop,startleft,endtop,endleft) {
-    var margintop = starttop;
+//z lava dole -z lava odbocka do prava, zadavaju sa suradnice pokial ideme rovno- po zaciatok oblúka- popis ako to funguje je v tejto funkcii
+//podobne potom sú ostatné
+function goleft_down(car,starttop,startleft,endtop,endleft) {//chceme ist z lava dole cisze z lava odbocit do prava
+    var margintop = starttop;   //ideme rovno
     var marginleft = startleft;
 
     if (starttop < endtop)
@@ -774,13 +1391,14 @@ function goleft_down(car,starttop,startleft,endtop,endleft) {
 
     if ((starttop !== endtop) || (startleft !== endleft))
         timeOutVar.push (setTimeout(function () {
-            goleft_down(car, margintop, marginleft, endtop, endleft)
+            goleft_down(car, margintop, marginleft, endtop, endleft)    //voláme samých seba
         }, 1));
     else
-        goleftdown(car, endtop, endleft, 90,0);
+        goleftdown(car, endtop, endleft, 90,0); //nachadzame sa uz v krizovatka a chceme spravit obluk
 }
+//oblúk + rovná koncová čiara
 function goleftdown(car,starttop,startleft,angle,counter) {
-    angle++;
+    angle++;                //obluk má 90 stupnov a preto je counter 90 9 krát zavoláme samých seba pričom sa vzdy zmení margin o kúsok
     var margintop=starttop;
     margintop++;
 
@@ -794,10 +1412,10 @@ function goleftdown(car,starttop,startleft,angle,counter) {
     if((counter<90))
         timeOutVar.push (setTimeout(function() {
             goleftdown(car,margintop,marginleft,angle,counter)},10));
-    else
+    else    //dokrelili sme oblúk takze ideme uz len rovno von z divu
         gostraigh(car,margintop,marginleft,1000,marginleft);
 }
-
+//z lava hore -z lava odbocka do lava, zadavaju sa suradnice pokial ideme rovno- po zaciatok oblúka
 function goleft_up(car,starttop,startleft,endtop,endleft) {
     var margintop = starttop;
     var marginleft = startleft;
@@ -839,7 +1457,7 @@ function goleftup(car,starttop,startleft,angle,counter) {
     else
         gostraigh(car,margintop,marginleft,-500,marginleft);
 }
-
+//z prava hore -z prava odbocka do doprava, zadavaju sa suradnice pokial ideme rovno- po zaciatok oblúka
 function goright_up(car,starttop,startleft,endtop,endleft) {
     var margintop = starttop;
     var marginleft = startleft;
@@ -881,7 +1499,7 @@ function gorightup(car,starttop,startleft,angle,counter) {
     else
         gostraigh(car,margintop,marginleft,-500,marginleft);
 }
-
+//z prava dole -z prava odbocka do lava, zadavaju sa suradnice pokial ideme rovno- po zaciatok oblúka
 function goright_down(car,starttop,startleft,endtop,endleft) {
     var margintop = starttop;
     var marginleft = startleft;
@@ -923,7 +1541,7 @@ function gorightdown(car,starttop,startleft,angle,counter) {
     else
         gostraigh(car,margintop,marginleft,1000,marginleft);
 }
-
+//z hora doprava -z hora odbocka do lava, zadavaju sa suradnice pokial ideme rovno- po zaciatok oblúka
 function goup_right(car, starttop, startleft, endtop, endleft) {
     var margintop = starttop;
     var marginleft = startleft;
@@ -964,7 +1582,7 @@ function goupright(car,starttop,startleft,angle,counter) {
     else
         gostraigh(car,margintop,marginleft,margintop,1050);
 }
-
+//z hora do lava -z hora odbocka do prava, zadavaju sa suradnice pokial ideme rovno- po zaciatok oblúka
 function goup_left(car,starttop,startleft,endtop,endleft) {
     var margintop = starttop;
     var marginleft = startleft;
@@ -1006,7 +1624,7 @@ function goupleft(car,starttop,startleft,angle,counter) {
     else
         gostraigh(car,margintop,marginleft,margintop,-200);
 }
-
+//z dola do lava  -z dola odbocka do lava, zadavaju sa suradnice pokial ideme rovno- po zaciatok oblúka
 function godown_left(car,starttop,startleft,endtop,endleft) {
     var margintop = starttop;
     var marginleft = startleft;
@@ -1048,7 +1666,7 @@ function godownleft(car,starttop,startleft,angle,counter) {
     else
         gostraigh(car,margintop,marginleft,margintop,-200);
 }
-
+//z dola do prava -z dola odbocka do prava, zadavaju sa suradnice pokial ideme rovno- po zaciatok oblúka
 function godown_right(car,starttop,startleft,endtop,endleft) {
     var margintop = starttop;
     var marginleft = startleft;
@@ -1090,7 +1708,7 @@ function godownright(car,starttop,startleft,angle,counter) {
     else
         gostraigh(car,margintop,marginleft,margintop,1200);
 }
-
+//kruhový objazd znovu pužívať funkcie iba z pomlckou
 function goround_1(car,starttop,startleft,angle,counter) {
     angle=angle-1;
 
