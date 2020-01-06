@@ -15,7 +15,7 @@ var krizovatka1=[
     ["car2","car1"],
     ["car1","car3","car4"],
     ["car2","car1","car3"],
-    ["car3","car1","car2"],
+    ["car2","car3","car1"],
     ["car1","car4","car3"],
     ["car2","car3","car1"]
 
@@ -30,7 +30,7 @@ var krizovatka2=[
     ["car6"],
     ["car3","car1","car4"],
     ["car6"],
-    ["car3","car2","car1"],
+    ["car6"],
     ["car4","car1","car3"],
     ["car2","car1","car3"]
 
@@ -40,7 +40,12 @@ var krizovatka2=[
 var krizovatka=[];
 krizovatky(i);
 
+function vysvetlenie() {
 
+    var x=document.getElementById('vysvetlenie '+i.toString());
+    x.style.display="inline";
+
+}
 var selectedOption = document.getElementById("krizovatky");
 selectedOption.onchange = function() {
     i = Number(selectedOption.value);
@@ -94,7 +99,7 @@ function kontrola(){
     }
 
 }
-function krizovatky(i) {
+function krizovatky() {
     tID2.forEach( clearInterval );
     k=0;
     $("#car1").off("click");
@@ -110,6 +115,11 @@ function krizovatky(i) {
     document.getElementById("car3").style.visibility="hidden";
     document.getElementById("car4").style.visibility="hidden";
     document.getElementById("car5").style.visibility="hidden";
+    //schovanie  vysvetleni
+    var u=document.getElementsByClassName('vysvetlenie');
+    for (x=0;x<u.length;x++){
+        u[x].style.display="none"
+    }
     if (i === 1) {
         animateScript(1,size_canvas/2-50,size_canvas/2-300,90,1,"car1");
         animateScript(5,size_canvas/2+100,size_canvas/2-50,0,0,"car2");
