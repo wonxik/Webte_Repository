@@ -1,9 +1,23 @@
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 var size_canvas = 700;
-var i=1;
+var i=5;
+var k;
 var tID=[];
+var tID2=[];
+var timeOutVar=[];
+var krizovatka1=[
+    ["car3","car4","car2","car1"],
+    ["car2","car3","car1"],
+    [],
+    [],
+    ["car2","car1"]
+
+];
+
+var krizovatka=[];
 krizovatky(i);
+
 
 var selectedOption = document.getElementById("krizovatky");
 selectedOption.onchange = function() {
@@ -41,11 +55,34 @@ function animateScript(cars,top,left,angle,blinker,car) {
         , interval ));}
 
 }
+function demo() {
+     tID2.push(setInterval ( function (){
+             $("#"+krizovatka1[i-1][k]).click();
+             k++;
+         }
+         , 1000));}
 
+function kontrola(){
+    if(JSON.stringify(krizovatka1[i-1])===JSON.stringify(krizovatka))
+    {
+        alert("riešenie je správne");
+    }
+    else{
+        alert("riešenie je nesprávne");
+    }
 
+}
      function krizovatky(i) {
+     tID2.forEach( clearInterval );
+        k=0;
+        krizovatka=[];
          tID.forEach( clearInterval );
-
+         timeOutVar.forEach(clearTimeout);
+         $("#car1").off("click");
+         $("#car2").off("click");
+         $("#car3").off("click");
+         $("#car4").off("click");
+         $("#car5").off("click");
          document.getElementById("car1").style.visibility="hidden";
          document.getElementById("car2").style.visibility="hidden";
          document.getElementById("car3").style.visibility="hidden";
@@ -58,15 +95,19 @@ function animateScript(cars,top,left,angle,blinker,car) {
        animateScript(4,size_canvas/2-150,size_canvas/2+100,270,1,"car4");
 
        //STEVO
-        $('#car1').click(function(event) {
-            goleft_up("car1",size_canvas/2-50,size_canvas/2-300, size_canvas / 2-50, size_canvas/2-125);});
-        $('#car2').click(function(event) {
-            gostraigh("car2", size_canvas/2+100,size_canvas/2-50, -200, size_canvas/2-50,);});
-        $('#car3').click(function(event) {
-            goup_right("car3", size_canvas/2-300,size_canvas/2-150, size_canvas / 2-145, size_canvas/2-150);});
-        $('#car4').click(function(event) {
-            goright_down("car4", size_canvas/2-150,size_canvas/2+100, size_canvas / 2-150, size_canvas/2-70);});
-//STEVO
+        $('#car1').on("click",function(event) {
+            goleft_up("car1",size_canvas/2-50,size_canvas/2-300, size_canvas / 2-50, size_canvas/2-125);
+            krizovatka.push("car1");});
+        $('#car2').on("click",function(event) {
+            gostraigh("car2", size_canvas/2+100,size_canvas/2-50, -200, size_canvas/2-50,);
+            krizovatka.push("car2");});
+        $('#car3').on("click",function(event) {
+            goup_right("car3", size_canvas/2-300,size_canvas/2-150, size_canvas / 2-145, size_canvas/2-150);
+            krizovatka.push("car3");});
+        $('#car4').on("click",function(event) {
+            goright_down("car4", size_canvas/2-150,size_canvas/2+100, size_canvas / 2-150, size_canvas/2-70);
+            krizovatka.push("car4");});
+        //STEVO
         ctx.setLineDash([0, 0]);
         ctx.strokeStyle="#000000";
         ctx.lineWidth = 2;
@@ -235,9 +276,20 @@ function animateScript(cars,top,left,angle,blinker,car) {
         ctx.stroke();
     }
     else if (i === 2) {
+        timeOutVar.forEach(clearTimeout);
         animateScript(1,size_canvas/2-150,size_canvas/3+100,270,1,"car1");
         animateScript(5,size_canvas/2+100,size_canvas/3-50,0,0,"car2");
         animateScript(0,size_canvas/2-300,size_canvas/3-150,180,1,"car3");
+
+        $('#car3').on("click",function(event) {
+            goup_right("car3", size_canvas/2-300,size_canvas/2-270, size_canvas / 2-145, size_canvas/2-270);
+            krizovatka.push("car3");});
+        $('#car1').on("click",function(event) {
+            goright_down("car1", size_canvas/2-150,size_canvas/2-20, size_canvas / 2-150, size_canvas/2-180);
+            krizovatka.push("car1");});
+        $('#car2').on("click",function(event) {
+            gostraigh("car2", size_canvas/2+100,size_canvas/3-50, -200, size_canvas/3-50,);
+            krizovatka.push("car2");});
         //pozadie
         ctx.fillStyle = "green";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -573,6 +625,12 @@ function animateScript(cars,top,left,angle,blinker,car) {
 
         animateScript(5,size_canvas/2+100,size_canvas/2-50,0,1,"car1");
         animateScript(0,size_canvas/2-270,size_canvas/2+50,270,1,"car2");
+        $('#car1').on("click",function(event) {
+            godown_left("car1", size_canvas/2+100,size_canvas/2-50, size_canvas/2-180, size_canvas/2-50,);
+            krizovatka.push("car1");});
+        $('#car2').on("click",function(event) {
+            goright_down("car2", size_canvas/2-270,size_canvas/2+50, size_canvas / 2-270, size_canvas/2-70);
+            krizovatka.push("car2");});
         ctx.beginPath();
         //pozadie
         ctx.fillStyle = "green";
@@ -640,9 +698,9 @@ function gostraigh(car,starttop,startleft,endtop,endleft) {
     document.getElementById(car).style.marginTop = margintop + "px";
 
     if ((starttop !== endtop) || (startleft !== endleft))
-        setTimeout(function () {
+        timeOutVar.push (setTimeout(function () {
             gostraigh(car, margintop, marginleft, endtop, endleft)
-        }, 1);
+        }, 1));
 
 }
 
@@ -662,9 +720,9 @@ function goleft_down(car,starttop,startleft,endtop,endleft) {
     document.getElementById(car).style.marginTop = margintop + "px";
 
     if ((starttop !== endtop) || (startleft !== endleft))
-        setTimeout(function () {
+        timeOutVar.push (setTimeout(function () {
             goleft_down(car, margintop, marginleft, endtop, endleft)
-        }, 1);
+        }, 1));
     else
         goleftdown(car, endtop, endleft, 90,0);
 }
@@ -681,8 +739,8 @@ function goleftdown(car,starttop,startleft,angle,counter) {
     document.getElementById(car).style.transform=transformm;
     counter++;
     if((counter<90))
-        setTimeout(function() {
-            goleftdown(car,margintop,marginleft,angle,counter)},10);
+        timeOutVar.push (setTimeout(function() {
+            goleftdown(car,margintop,marginleft,angle,counter)},10));
     else
         gostraigh(car,margintop,marginleft,1000,marginleft);
 }
@@ -703,9 +761,9 @@ function goleft_up(car,starttop,startleft,endtop,endleft) {
     document.getElementById(car).style.marginTop = margintop + "px";
 
     if ((starttop !== endtop) || (startleft !== endleft))
-        setTimeout(function () {
+        timeOutVar.push (setTimeout(function () {
             goleft_up(car, margintop, marginleft, endtop, endleft)
-        }, 1);
+        }, 1));
     else
         goleftup(car, endtop, endleft, 90,0);
 }
@@ -723,8 +781,8 @@ function goleftup(car,starttop,startleft,angle,counter) {
     document.getElementById(car).style.transform=transformm;
     counter++;
     if((counter<90))
-        setTimeout(function() {
-            goleftup(car,margintop,marginleft,angle,counter)},10);
+        timeOutVar.push (setTimeout(function() {
+            goleftup(car,margintop,marginleft,angle,counter)},10));
     else
         gostraigh(car,margintop,marginleft,-500,marginleft);
 }
@@ -745,9 +803,9 @@ function goright_up(car,starttop,startleft,endtop,endleft) {
     document.getElementById(car).style.marginTop = margintop + "px";
 
     if ((starttop !== endtop) || (startleft !== endleft))
-        setTimeout(function () {
+        timeOutVar.push ( setTimeout(function () {
             goright_up(car, margintop, marginleft, endtop, endleft)
-        }, 1);
+        }, 1));
     else
         gorightup(car, endtop, endleft, 270,0);
 }
@@ -765,8 +823,8 @@ function gorightup(car,starttop,startleft,angle,counter) {
     document.getElementById(car).style.transform=transformm;
     counter++;
     if((counter<90))
-        setTimeout(function() {
-            gorightup(car,margintop,marginleft,angle,counter)},10);
+        timeOutVar.push (setTimeout(function() {
+            gorightup(car,margintop,marginleft,angle,counter)},10));
     else
         gostraigh(car,margintop,marginleft,-500,marginleft);
 }
@@ -787,9 +845,9 @@ function goright_down(car,starttop,startleft,endtop,endleft) {
     document.getElementById(car).style.marginTop = margintop + "px";
 
     if ((starttop !== endtop) || (startleft !== endleft))
-        setTimeout(function () {
+        timeOutVar.push( setTimeout(function () {
             goright_down(car, margintop, marginleft, endtop, endleft)
-        }, 1);
+        }, 1));
     else
         gorightdown(car, endtop, endleft, 270,0);
 }
@@ -807,8 +865,8 @@ function gorightdown(car,starttop,startleft,angle,counter) {
     document.getElementById(car).style.transform=transformm;
     counter++;
     if((counter<90))
-        setTimeout(function() {
-            gorightdown(car,margintop,marginleft,angle,counter)},10);
+        timeOutVar.push( setTimeout(function() {
+            gorightdown(car,margintop,marginleft,angle,counter)},10));
     else
         gostraigh(car,margintop,marginleft,1000,marginleft);
 }
@@ -829,9 +887,9 @@ function goup_right(car, starttop, startleft, endtop, endleft) {
     document.getElementById(car).style.marginTop = margintop + "px";
 
     if ((starttop !== endtop) || (startleft !== endleft))
-        setTimeout(function () {
+        timeOutVar.push( setTimeout(function () {
             goup_right(car, margintop, marginleft, endtop, endleft)
-        }, 1);
+        }, 1));
     else
         goupright(car, endtop, endleft, 180,0);
 }
@@ -848,8 +906,8 @@ function goupright(car,starttop,startleft,angle,counter) {
     document.getElementById(car).style.transform=transformm;
     counter++;
     if((counter<90))
-        setTimeout(function() {
-            goupright(car,margintop,marginleft,angle,counter)},10);
+        timeOutVar.push (setTimeout(function() {
+            goupright(car,margintop,marginleft,angle,counter)},10));
     else
         gostraigh(car,margintop,marginleft,margintop,1050);
 }
@@ -870,9 +928,9 @@ function goup_left(car,starttop,startleft,endtop,endleft) {
     document.getElementById(car).style.marginTop = margintop + "px";
 
     if ((starttop !== endtop) || (startleft !== endleft))
-        setTimeout(function () {
+        timeOutVar.push (setTimeout(function () {
             goup_left(car, margintop, marginleft, endtop, endleft)
-        }, 1);
+        }, 1));
     else
         goupleft(car, endtop, endleft, 180,0);
 }
@@ -890,8 +948,8 @@ function goupleft(car,starttop,startleft,angle,counter) {
     document.getElementById(car).style.transform=transformm;
     counter++;
     if((counter<90))
-        setTimeout(function() {
-            goupleft(car,margintop,marginleft,angle,counter)},10);
+        timeOutVar.push( setTimeout(function() {
+            goupleft(car,margintop,marginleft,angle,counter)},10));
     else
         gostraigh(car,margintop,marginleft,margintop,-200);
 }
@@ -912,9 +970,9 @@ function godown_left(car,starttop,startleft,endtop,endleft) {
     document.getElementById(car).style.marginTop = margintop + "px";
 
     if ((starttop !== endtop) || (startleft !== endleft))
-        setTimeout(function () {
+        timeOutVar.push(setTimeout(function () {
             godown_left(car, margintop, marginleft, endtop, endleft)
-        }, 1);
+        }, 1));
     else
         godownleft(car, endtop, endleft, 0,0);
 }
@@ -932,8 +990,8 @@ function godownleft(car,starttop,startleft,angle,counter) {
     document.getElementById(car).style.transform=transformm;
     counter++;
     if((counter<90))
-        setTimeout(function() {
-            godownleft(car,margintop,marginleft,angle,counter)},10);
+        timeOutVar.push (setTimeout(function() {
+            godownleft(car,margintop,marginleft,angle,counter)},10));
     else
         gostraigh(car,margintop,marginleft,margintop,-200);
 }
@@ -954,9 +1012,9 @@ function godown_right(car,starttop,startleft,endtop,endleft) {
     document.getElementById(car).style.marginTop = margintop + "px";
 
     if ((starttop !== endtop) || (startleft !== endleft))
-        setTimeout(function () {
+        timeOutVar.push ( setTimeout(function () {
             godown_right(car, margintop, marginleft, endtop, endleft)
-        }, 1);
+        }, 1));
     else
         godownright(car, endtop, endleft, 0,0);
 }
@@ -974,8 +1032,8 @@ function godownright(car,starttop,startleft,angle,counter) {
     document.getElementById(car).style.transform=transformm;
     counter++;
     if((counter<90))
-        setTimeout(function() {
-            godownright(car,margintop,marginleft,angle,counter)},10);
+        timeOutVar.push (setTimeout(function() {
+            godownright(car,margintop,marginleft,angle,counter)},10));
     else
         gostraigh(car,margintop,marginleft,margintop,1200);
 }
