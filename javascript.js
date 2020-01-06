@@ -1,7 +1,7 @@
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 var size_canvas = 700;
-var i=5;
+var i=4;
 var k;
 var tID=[];
 var tID2=[];
@@ -10,9 +10,18 @@ var timeOutVar=[];
 var krizovatka1=[
     ["car3","car4","car2","car1"],
     ["car2","car3","car1"],
-    [],
-    [],
+    ["car2","car1","car3"],
+    ["car1","car3","car2"],
     ["car2","car1"]
+
+];
+//toto je len preto ked su dve odpovede spravne tak tu nahravame druhu
+var krizovatka2=[
+    ["car6"],
+    ["car6"],
+    ["car1","car2","car3"],
+    ["car3","car1","car2"],
+    ["car6"]
 
 ];
 //do tochto pola sa ukladaju odpovede ako sme ich poklikali
@@ -61,10 +70,10 @@ function demo() {
             $("#"+krizovatka1[i-1][k]).click();
             k++;
         }
-        , 1000));}
+        , 1500));}
 
 function kontrola(){
-    if(JSON.stringify(krizovatka1[i-1])===JSON.stringify(krizovatka))
+    if(JSON.stringify(krizovatka1[i-1])===JSON.stringify(krizovatka) || JSON.stringify(krizovatka2[i-1])===JSON.stringify(krizovatka))
     {
         alert("riešenie je správne");
     }
@@ -79,11 +88,6 @@ function krizovatky(i) {
     krizovatka=[];
     tID.forEach( clearInterval );
     timeOutVar.forEach(clearTimeout);
-    $("#car1").off("click");
-    $("#car2").off("click");
-    $("#car3").off("click");
-    $("#car4").off("click");
-    $("#car5").off("click");
     document.getElementById("car1").style.visibility="hidden";
     document.getElementById("car2").style.visibility="hidden";
     document.getElementById("car3").style.visibility="hidden";
@@ -98,16 +102,21 @@ function krizovatky(i) {
         //STEVO
         $('#car1').on("click",function(event) {
             goleft_up("car1",size_canvas/2-50,size_canvas/2-300, size_canvas / 2-50, size_canvas/2-125);
-            krizovatka.push("car1");});
+            krizovatka.push("car1");
+            $("#car1").off("click");});
         $('#car2').on("click",function(event) {
             gostraigh("car2", size_canvas/2+100,size_canvas/2-50, -200, size_canvas/2-50,);
-            krizovatka.push("car2");});
+            krizovatka.push("car2");
+            $("#car2").off("click");
+        });
         $('#car3').on("click",function(event) {
             goup_right("car3", size_canvas/2-300,size_canvas/2-150, size_canvas / 2-145, size_canvas/2-150);
-            krizovatka.push("car3");});
+            krizovatka.push("car3");
+            $("#car3").off("click");});
         $('#car4').on("click",function(event) {
             goright_down("car4", size_canvas/2-150,size_canvas/2+100, size_canvas / 2-150, size_canvas/2-70);
-            krizovatka.push("car4");});
+            krizovatka.push("car4");
+            $("#car4").off("click");});
         //STEVO
         ctx.setLineDash([0, 0]);
         ctx.strokeStyle="#000000";
@@ -284,13 +293,16 @@ function krizovatky(i) {
 
         $('#car3').on("click",function(event) {
             goup_right("car3", size_canvas/2-300,size_canvas/2-270, size_canvas / 2-145, size_canvas/2-270);
-            krizovatka.push("car3");});
+            krizovatka.push("car3");
+            $("#car3").off("click");});
         $('#car1').on("click",function(event) {
             goright_down("car1", size_canvas/2-150,size_canvas/2-20, size_canvas / 2-150, size_canvas/2-180);
-            krizovatka.push("car1");});
+            krizovatka.push("car1");
+            $("#car1").off("click");});
         $('#car2').on("click",function(event) {
             gostraigh("car2", size_canvas/2+100,size_canvas/3-50, -200, size_canvas/3-50,);
-            krizovatka.push("car2");});
+            krizovatka.push("car2");
+            $("#car2").off("click");});
         //pozadie
         ctx.fillStyle = "green";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -430,18 +442,24 @@ function krizovatky(i) {
         animateScript(5,size_canvas/2-100,size_canvas/2+50,0,2,"car2");
         animateScript(0,size_canvas/2-240,size_canvas/2-170,230,0,"car3");
         $('#car1').on("click",function(event) {
-            goleft_down("car1",size_canvas/2-50,size_canvas/2-400,size_canvas/2-50,size_canvas/2-260)});
+            goleft_down("car1",size_canvas/2-50,size_canvas/2-400,size_canvas/2-50,size_canvas/2-260);
+        krizovatka.push("car1");
+            $("#car1").off("click");});
         $('#car2').on("click",function(event) {
-            goround_1("car2",size_canvas/2-120,size_canvas/2+50, 0,0)});
+            goround_1("car2",size_canvas/2-120,size_canvas/2+50, 0,0);
+            krizovatka.push("car2");
+            $("#car2").off("click");});
         $('#car3').on("click",function(event) {
-            goround_2("car3",size_canvas/2-240,size_canvas/2-170,230,0)});
+            goround_2("car3",size_canvas/2-240,size_canvas/2-170,230,0);
+            krizovatka.push("car3");
+            $("#car3").off("click");});
         //pozadie
         ctx.fillStyle = "green";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         //stredové kruhy
         ctx.beginPath();
         ctx.fillStyle = "#585759";
-        ctx.arc(size_canvas / 2, size_canvas / 2, 95, 0, Math.PI * 2, true);
+        ctx.arc(size_canvas / 2, size_canvas / 2, 55, 0, Math.PI * 2, true);
         ctx.arc(size_canvas / 2, size_canvas / 2, 205, 0, Math.PI * 2, true);
         ctx.fill('evenodd');
         //krajné cesty
@@ -455,7 +473,7 @@ function krizovatky(i) {
         ctx.beginPath();
         ctx.fillStyle = "#000000";
         ctx.lineWidth=2;
-        ctx.arc(size_canvas / 2, size_canvas / 2, 100, 0, Math.PI * 2, true);
+        ctx.arc(size_canvas / 2, size_canvas / 2, 60, 0, Math.PI * 2, true);
         ctx.moveTo(size_canvas / 2 - 100, 0);
         ctx.lineTo(size_canvas / 2 - 100, size_canvas / 2 - 175);
         ctx.moveTo(size_canvas / 2 + 100, 0);
@@ -494,10 +512,31 @@ function krizovatky(i) {
     }
     else if(i===4) {
         animateScript(1,size_canvas/2-50,size_canvas/2-350,90,0,"car1");
-        animateScript(6,size_canvas/2+100,size_canvas/2,0,2,"car2");
+        animateScript(6,size_canvas/2+100,size_canvas/2+20  ,0,2,"car2");
         animateScript(0,size_canvas/2-150,size_canvas/2+150,270,0,"car3");
-        animateScript(5,size_canvas/2+100,size_canvas/2-100,0,0,"car4");
+        animateScript(5,size_canvas/2+100,size_canvas/2-100,0,1,"car4");
         animateScript(2,size_canvas/2-300,size_canvas/2-200,180,2,"car5");
+        $('#car4').on("click",function(event) {
+            godown_left("car4", size_canvas/2+100,size_canvas/2-100, size_canvas / 2-70, size_canvas/2-100);
+            krizovatka.push("car4");
+            $("#car4").off("click");});
+        $('#car1').on("click",function(event) {
+            gostraigh("car1", size_canvas/2-50,size_canvas/2-350, size_canvas/2-50, size_canvas+200);
+            krizovatka.push("car1");
+            $("#car1").off("click");});
+        $('#car2').on("click",function(event) {
+            godown_right("car2",size_canvas/2+100,size_canvas/2+20, size_canvas / 2+40, size_canvas/2+20);
+            krizovatka.push("car2");
+            $("#car2").off("click");});
+        $('#car3').on("click",function(event) {
+            gostraigh("car3", size_canvas/2-150,size_canvas/2+150, size_canvas/2-150, -200);
+            krizovatka.push("car3");
+            $("#car3").off("click");});
+
+        $('#car5').on("click",function(event) {
+            goup_left("car5",size_canvas/2-300,size_canvas/2-200, size_canvas / 2-235, size_canvas/2-200);
+            krizovatka.push("car5");
+            $("#car5").off("click");});
         //pozadie
         ctx.fillStyle = "green";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -634,10 +673,12 @@ function krizovatky(i) {
         animateScript(0,size_canvas/2-270,size_canvas/2+50,270,1,"car2");
         $('#car1').on("click",function(event) {
             godown_left("car1", size_canvas/2+100,size_canvas/2-50, size_canvas/2-180, size_canvas/2-50,);
-            krizovatka.push("car1");});
+            krizovatka.push("car1");
+            $("#car1").off("click");});
         $('#car2').on("click",function(event) {
             goright_down("car2", size_canvas/2-270,size_canvas/2+50, size_canvas / 2-270, size_canvas/2-70);
-            krizovatka.push("car2");});
+            krizovatka.push("car2");
+            $("#car2").off("click");});
         ctx.beginPath();
         //pozadie
         ctx.fillStyle = "green";
