@@ -6,6 +6,7 @@ var k;
 var tID=[];
 var tID2=[];
 var timeOutVar=[];
+//tu su uložene spravne poradia aut pre križovatky
 var krizovatka1=[
     ["car3","car4","car2","car1"],
     ["car2","car3","car1"],
@@ -14,14 +15,14 @@ var krizovatka1=[
     ["car2","car1"]
 
 ];
-
+//do tochto pola sa ukladaju odpovede ako sme ich poklikali
 var krizovatka=[];
 krizovatky(i);
 
 
 var selectedOption = document.getElementById("krizovatky");
 selectedOption.onchange = function() {
-     i = Number(selectedOption.value);
+    i = Number(selectedOption.value);
     krizovatky(i)};
 /*
       animespirit(auto ako chcete vzor 0-6 je auto 7 je električka,
@@ -46,21 +47,21 @@ function animateScript(cars,top,left,angle,blinker,car) {
     document.getElementById(car).style.backgroundPosition =
         `-${cars*200}px -0px`;
     if(blinker!==0){
-    tID.push( setInterval ( function (){
-            document.getElementById(car).style.backgroundPosition =
-                `-${cars*200}px -${position*blinker}px`;
-            if (position ===0) {position =200;}
-            else { position = 0;}
-        }
-        , interval ));}
+        tID.push( setInterval ( function (){
+                document.getElementById(car).style.backgroundPosition =
+                    `-${cars*200}px -${position*blinker}px`;
+                if (position ===0) {position =200;}
+                else { position = 0;}
+            }
+            , interval ));}
 
 }
 function demo() {
-     tID2.push(setInterval ( function (){
-             $("#"+krizovatka1[i-1][k]).click();
-             k++;
-         }
-         , 1000));}
+    tID2.push(setInterval ( function (){
+            $("#"+krizovatka1[i-1][k]).click();
+            k++;
+        }
+        , 1000));}
 
 function kontrola(){
     if(JSON.stringify(krizovatka1[i-1])===JSON.stringify(krizovatka))
@@ -72,29 +73,29 @@ function kontrola(){
     }
 
 }
-     function krizovatky(i) {
-     tID2.forEach( clearInterval );
-        k=0;
-        krizovatka=[];
-         tID.forEach( clearInterval );
-         timeOutVar.forEach(clearTimeout);
-         $("#car1").off("click");
-         $("#car2").off("click");
-         $("#car3").off("click");
-         $("#car4").off("click");
-         $("#car5").off("click");
-         document.getElementById("car1").style.visibility="hidden";
-         document.getElementById("car2").style.visibility="hidden";
-         document.getElementById("car3").style.visibility="hidden";
-         document.getElementById("car4").style.visibility="hidden";
-         document.getElementById("car5").style.visibility="hidden";
+function krizovatky(i) {
+    tID2.forEach( clearInterval );
+    k=0;
+    krizovatka=[];
+    tID.forEach( clearInterval );
+    timeOutVar.forEach(clearTimeout);
+    $("#car1").off("click");
+    $("#car2").off("click");
+    $("#car3").off("click");
+    $("#car4").off("click");
+    $("#car5").off("click");
+    document.getElementById("car1").style.visibility="hidden";
+    document.getElementById("car2").style.visibility="hidden";
+    document.getElementById("car3").style.visibility="hidden";
+    document.getElementById("car4").style.visibility="hidden";
+    document.getElementById("car5").style.visibility="hidden";
     if (i === 1) {
         animateScript(1,size_canvas/2-50,size_canvas/2-300,90,1,"car1");
-       animateScript(5,size_canvas/2+100,size_canvas/2-50,0,0,"car2");
-       animateScript(0,size_canvas/2-300,size_canvas/2-150,180,1,"car3");
-       animateScript(4,size_canvas/2-150,size_canvas/2+100,270,1,"car4");
+        animateScript(5,size_canvas/2+100,size_canvas/2-50,0,0,"car2");
+        animateScript(0,size_canvas/2-300,size_canvas/2-150,180,1,"car3");
+        animateScript(4,size_canvas/2-150,size_canvas/2+100,270,1,"car4");
 
-       //STEVO
+        //STEVO
         $('#car1').on("click",function(event) {
             goleft_up("car1",size_canvas/2-50,size_canvas/2-300, size_canvas / 2-50, size_canvas/2-125);
             krizovatka.push("car1");});
@@ -423,11 +424,17 @@ function kontrola(){
         ctx.setLineDash([0, 0]);
         ctx.strokeStyle="#000000";
         ctx.lineWidth = 2;
-        }
+    }
     else if (i === 3) {
         animateScript(1,size_canvas/2-50,size_canvas/2-400,90,0,"car1");
         animateScript(5,size_canvas/2-100,size_canvas/2+50,0,2,"car2");
         animateScript(0,size_canvas/2-240,size_canvas/2-170,230,0,"car3");
+        $('#car1').on("click",function(event) {
+            goleft_down("car1",size_canvas/2-50,size_canvas/2-400,size_canvas/2-50,size_canvas/2-260)});
+        $('#car2').on("click",function(event) {
+            goround_1("car2",size_canvas/2-120,size_canvas/2+50, 0,0)});
+        $('#car3').on("click",function(event) {
+            goround_2("car3",size_canvas/2-240,size_canvas/2-170,230,0)});
         //pozadie
         ctx.fillStyle = "green";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -1036,4 +1043,92 @@ function godownright(car,starttop,startleft,angle,counter) {
             godownright(car,margintop,marginleft,angle,counter)},10));
     else
         gostraigh(car,margintop,marginleft,margintop,1200);
+}
+
+function goround_1(car,starttop,startleft,angle,counter) {
+    angle=angle-1;
+
+    var margintop=starttop;
+    margintop--;
+
+    var marginleft=startleft;
+    marginleft--;
+    var transformm="rotate("+angle+"deg)";
+    document.getElementById(car).style.marginLeft=marginleft+"px";
+    document.getElementById(car).style.marginTop=margintop+"px";
+    document.getElementById(car).style.transform=transformm;
+    counter++;
+    if((counter<45))
+        timeOutVar.push ( setTimeout(function() {
+            goround_1(car,margintop,marginleft,angle,counter)},10));
+    else
+        goround1(car,margintop,marginleft,angle,0);
+
+}
+function goround1(car,starttop,startleft,angle,counter) {
+    angle=angle +1;
+
+    var margintop=starttop;
+    margintop--;
+
+    var marginleft=startleft;
+    marginleft--;
+    var transformm="rotate("+angle+"deg)";
+    document.getElementById(car).style.marginLeft=marginleft+"px";
+    document.getElementById(car).style.marginTop=margintop+"px";
+    document.getElementById(car).style.transform=transformm;
+    counter++;
+    if((counter<45))
+        timeOutVar.push ( setTimeout(function() {
+            goround1(car,margintop,marginleft,angle,counter)},10));
+    else
+        gostraigh(car,margintop,marginleft,-500,marginleft);
+}
+function goround_2(car,starttop,startleft,angle,counter) {
+
+
+    var margintop=starttop;
+
+
+    var marginleft=startleft;
+    if(counter<55){
+        marginleft=marginleft-1.4;
+        angle--;
+        margintop=margintop+2.3;
+    }
+
+    else{angle--;
+        margintop=margintop+2.7;
+        marginleft=marginleft+1.4;
+
+    }
+    var transformm="rotate("+angle+"deg)";
+    document.getElementById(car).style.marginLeft=marginleft+"px";
+    document.getElementById(car).style.marginTop=margintop+"px";
+    document.getElementById(car).style.transform=transformm;
+    counter++;
+    if((counter<90))
+        timeOutVar.push ( setTimeout(function() {
+            goround_2(car,margintop,marginleft,angle,counter)},12));
+    else
+        goround2(car,margintop,marginleft,angle,0);
+
+}
+function goround2(car,starttop,startleft,angle,counter) {
+    angle=angle+1;
+    var margintop=starttop;
+    margintop++;
+
+    var marginleft=startleft;
+    marginleft++;
+    var transformm="rotate("+angle+"deg)";
+    document.getElementById(car).style.marginLeft=marginleft+"px";
+    document.getElementById(car).style.marginTop=margintop+"px";
+    document.getElementById(car).style.transform=transformm;
+    counter++;
+    if((counter<40))
+        timeOutVar.push (setTimeout(function() {
+            goround2(car,margintop,marginleft,angle,counter)},10));
+    else
+        gostraigh(car,margintop,marginleft,1000,marginleft);
 }
