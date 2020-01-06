@@ -1,7 +1,7 @@
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 var size_canvas = 700;
-var i=4;
+var i=1;
 var k;
 var tID=[];
 var tID2=[];
@@ -85,6 +85,11 @@ function kontrola(){
 function krizovatky(i) {
     tID2.forEach( clearInterval );
     k=0;
+    $("#car1").off("click");
+    $("#car2").off("click");
+    $("#car3").off("click");
+    $("#car4").off("click");
+    $("#car5").off("click");
     krizovatka=[];
     tID.forEach( clearInterval );
     timeOutVar.forEach(clearTimeout);
