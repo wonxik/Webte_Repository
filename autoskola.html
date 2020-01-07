@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="sk">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Autoškola</title>
+  <link rel="shortcut icon" href="data/A_favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+
+  <script src="scripts/jquery.slim.min.js"></script>
+  <script src="scripts/bootstrap.bundle.min.js"></script>
+
+  <!-- <link rel="stylesheet" type="text/css" href="css/canvasstyle.css"> -->
+  <link rel="stylesheet" href="css/autoskola.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Úvod</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Klikni na mňa!</a>
+            <!-- Here's the magic. Add the .animate and .slide-in classes to your .dropdown-menu and you're all set! -->
+            <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="autoskola.html">Autoškola</a>
+              <a class="dropdown-item" href="kalendar.html">Kalendár</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="onas.html">O nás</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container text-center">
+    <h1 class="mt-5 text-white font-weight-light" id="nadpis2">Autoškola</h1>
+    <p class="lead text-white-50" id="p2">V akom poradí prejdu autá cez križovatku? <br>Pomôcka: Kliknutím na auto sa začne
+      hýbať.</p>
+
+    <select id="krizovatky" name="volba">
+      <option id="1krizovatka" value="1">1</option>
+      <option id="2krizovatka" value="2">2</option>
+      <option id="3krizovatka" value="3">3</option>
+      <option id="4krizovatka" value="4">4</option>
+      <option id="5krizovatka" value="5">5</option>
+      <option id="6krizovatka" value="6">6</option>
+      <option id="7krizovatka" value="7">7</option>
+      <option id="8krizovatka" value="8">8</option>
+      <option id="9krizovatka" value="9">9</option>
+      <option id="10krizovatka" value="10">10</option>
+      <option id="11krizovatka" value="11">11</option>
+      <option id="12krizovatka" value="12">12</option>
+      <option id="13krizovatka" value="13">13</option>
+      <option id="14krizovatka" value="14">14</option>
+      <option id="15krizovatka" value="15">15</option>
+    </select>
+
+    <button id="vyhodnotenie" onclick="kontrola()">Vyhodnotenie</button>
+    <button id="demo2" onclick="demo()">Demo</button>
+    <button id="refresh" onclick="krizovatky()">Refresh</button>
+    <button id="vysvetlenie" onclick="vysvetlenie()">Vysvetlenie</button>
+
+    <div class="container text-center" id="demo">
+      <div id="car1"></div>
+      <div id="car2"></div>
+      <div id="car3"></div>
+      <div id="car4"></div>
+      <div id="car5"></div>
+
+
+      <canvas id="myCanvas" width="700" height="700" style="border:1px solid #000000;">
+
+      </canvas>
+    </div>
+
+    <div class="vysvetlenia">
+      <div id="vysvetlenie1" class="vysvetlenie">
+        <h1 class="mt-5 text-white font-weight-light,vysvetlenie2">Vysvetlenie križovatky 1</h1>
+        <p class="lead text-white-50,vysvetlenie2">
+          Ako prvé prejde cez križovatku červené auto pretože je na hlavnej ceste a dostáva prednosť pred bielim, ktoré
+          odbočuje na vedľajšiu cestu.
+          V poradí tretie prejde žlté auto, pretože sa uplatňuje pravidlo pravej ruky. Ako posledné prejde čierne auto.
+        </p>
+      </div>
+      <div id="vysvetlenie2" class="vysvetlenie">
+        <h1 class="mt-5 text-white font-weight-light,vysvetlenie2">Vysvetlenie križovatky 2</h1>
+        <p class="lead text-white-50,vysvetlenie2">
+          Ako prvé prejde žlté auto, pretože je na hlavnej ceste. V poradí druhé prejde červené auto, pretože je takisto
+          na hlavnej ceste.
+          Posledné prejde cez križovatku čierne auto.
+        </p>
+      </div>
+      <div id="vysvetlenie3" class="vysvetlenie">
+        <h1 class="mt-5 text-white font-weight-light,vysvetlenie2">Vysvetlenie križovatky 3</h1>
+        <p class="lead text-white-50,vysvetlenie2">
+          Žlté auto môže pokračovať nezávisle od ostatných. Červené auto dáva prednosť čiernemu, pretože sa tu uplatňuje
+          pravidlo pravej ruky.
+        </p>
+      </div>
+      <div id="vysvetlenie4" class="vysvetlenie">
+        <h1 class="mt-5 text-white font-weight-light,vysvetlenie2">Vysvetlenie križovatky 4</h1>
+        <p class="lead text-white-50,vysvetlenie2">
+          Ako prvé prejdú naraz čierne a červené auto, pretože majú zelenú. V poradí tretie prejde biele auto, aj keď má
+          zelenú musí dať
+          prednosť čiernemu autu. Ostatné autá stoja, pretože majú červenú.
+        </p>
+      </div>
+      <div id="vysvetlenie5" class="vysvetlenie">
+        <h1 class="mt-5 text-white font-weight-light,vysvetlenie2">Vysvetlenie križovatky 5</h1>
+        <p class="lead text-white-50,vysvetlenie2">
+          Červené auto prejde ako prvé, pretože sa tu uplatňuje pravidlo pravej ruky.
+        </p>
+      </div>
+      <div id="vysvetlenie6" class="vysvetlenie">
+        <h1 class="mt-5 text-white font-weight-light,vysvetlenie2">Vysvetlenie križovatky 6</h1>
+        <p class="lead text-white-50,vysvetlenie2">
+          Električka má prednosť na neoznačenej križovatke takže prejde naraz spolu s bielym autom.
+          Čierne auto dáva prednosť bielemu lebo čierne odbočuje do ľava.
+        </p>
+      </div>
+      <div id="vysvetlenie7" class="vysvetlenie">
+        <h1 class="mt-5 text-white font-weight-light,vysvetlenie2">Vysvetlenie križovatky 7</h1>
+        <p class="lead text-white-50,vysvetlenie2">
+          Modré auto prejde ako prvé lebo je na hlavnej ceste a pokračuje hlavnou cestou ďalej, zaním prejde kamión,
+          pretože kamión je tiež na hlavnej ceste ale odbočuje doľava a tak musí dať prednosť v jazde modrému autu,
+          Posledná prejde dodávka lebo ide s vedľajsěj cesty.
+        </p>
+      </div>
+      <div id="vysvetlenie8" class="vysvetlenie">
+        <h1 class="mt-5 text-white font-weight-light,vysvetlenie2">Vysvetlenie križovatky 8</h1>
+        <p class="lead text-white-50,vysvetlenie2">
+          Ako prvé prejde modré auto lebo odbočuje doprava a čierne auto mu dáva prednosť, lebo čierne odbočuje doľava.
+          Za modrým autom prejde čierne podľa pravidla pravej ruky. Posledný prejde kamión.
+        </p>
+      </div>
+      <div id="vysvetlenie9" class="vysvetlenie">
+        <h1 class="mt-5 text-white font-weight-light,vysvetlenie2">Vysvetlenie križovatky 9</h1>
+        <p class="lead text-white-50,vysvetlenie2">
+          Ako prvé prejdú električka spolu s oranžovým autom, pretože električka má prednosť a oranžové auto odbočuje do
+          prava. Červené auto dáva prednosť električke a oranžovému autu lebo odbočuje do ľava.
+        </p>
+      </div>
+      <div id="vysvetlenie10" class="vysvetlenie">
+        <h1 class="mt-5 text-white font-weight-light,vysvetlenie2">Vysvetlenie križovatky 10</h1>
+        <p class="lead text-white-50,vysvetlenie2">
+          Ako prvé prejde žlté auto lebo je na hlavnej ceste a oranžové auto mu dáva prednosť lebo žlté auto je na
+          pravo. Potom prejdú čierne a oranžové auto, môžu ísť naraz keďze si nekrížia cestu.
+        </p>
+      </div>
+      <div id="vysvetlenie11" class="vysvetlenie">
+        <h1 class="mt-5 text-white font-weight-light,vysvetlenie2">Vysvetlenie križovatky 11</h1>
+        <p class="lead text-white-50,vysvetlenie2">
+          Oranžové auto môže pokračovať nezávisle od ostatných áut. Biele auto dáva prednosť oranžovému, pretože sa tu
+          uplatňuje
+          pravidlo pravej ruky.
+        </p>
+      </div>
+      <div id="vysvetlenie12" class="vysvetlenie">
+        <h1 class="mt-5 text-white font-weight-light,vysvetlenie2">Vysvetlenie križovatky 12</h1>
+        <p class="lead text-white-50,vysvetlenie2">
+          Ako prvé prejde cez križovatku čierne vozidlo idúce po hlavnej ceste.
+          Ako druhé prejde modré vozidlo, pretože muselo dať pri odbočovaní vľavo prednosť
+          v jazde protiidúcemu čiernemu vozidlu.
+          V poradí posledné prejde oranžové vozidlo ktoré muselo dať prednosť v jazde vozidlám prichádzajúcim po hlavnej
+          ceste.
+        </p>
+      </div>
+      <div id="vysvetlenie13" class="vysvetlenie">
+        <h1 class="mt-5 text-white font-weight-light,vysvetlenie2">Vysvetlenie križovatky 13</h1>
+        <p class="lead text-white-50,vysvetlenie2">
+          Ako prvé prejde cez križovatku žlté vozidlo idúce po hlavnej ceste súčasne s bielym.
+          V poradí posledné prejde červené vozidlo ktoré muselo dať prednosť v jazde vozidlám prichádzajúcim po hlavnej
+          ceste.
+        </p>
+      </div>
+      <div id="vysvetlenie14" class="vysvetlenie">
+        <h1 class="mt-5 text-white font-weight-light,vysvetlenie2">Vysvetlenie križovatky 14</h1>
+        <p class="lead text-white-50,vysvetlenie2">
+          Pokiaľ nie je určené inak , kto má prednosť, značkami, semafórmi alebo pokynom policajta,
+          platí pravidlo pravej ruky. Autá prejdú v poradí čierne, biele a modré.
+        </p>
+      </div>
+      <div id="vysvetlenie15" class="vysvetlenie">
+        <h1 class="mt-5 text-white font-weight-light,vysvetlenie2">Vysvetlenie križovatky 15</h1>
+        <p class="lead text-white-50,vysvetlenie2">
+          Ako prvé prejde cez križovatku biele vozidlo prichádzajúce v smere, pre ktorý svieti signál VOĽNO.
+          Na signál zelenej doplnkovej šípky svietiaci súčasne so signálom s červeným svetlom STOJ! smie vodič modrého
+          vozidla odbočiť vpravo.
+          Pritom musí dať prednosť v jazde bielemu vozidlu idúcemu vo voľnom smere a chodcom prechádzajúcim vo voľnom
+          smere,
+          pritom ich nesmie ohroziť ani obmedziť a na tento účel je povinný zastaviť vozidlo.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts/autoskola.js"></script>
+</body>
+
+</html>

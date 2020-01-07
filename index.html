@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="sk">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Úvod</title>
+  <link rel="shortcut icon" href="data/A_favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+
+  <script src="scripts/jquery.slim.min.js"></script>
+  <script src="scripts/bootstrap.bundle.min.js"></script>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Úvod</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Klikni na mňa!
+            </a>
+            <!-- Here's the magic. Add the .animate and .slide-in classes to your .dropdown-menu and you're all set! -->
+            <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="autoskola.html">Autoškola</a>
+
+              <a class="dropdown-item" href="kalendar.html">Kalendár</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="onas.html">O nás</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container text-center">
+    <h1 class="mt-5 text-white font-weight-light" id="countnavsteva">Toto je </h1>
+
+    <h5 >Manuálik: </h5>
+    <ol>
+      <li><p>Náš WEB je rozdelený do niekoľkých podstránok. Úvod, Autoškola, Kalendár a O nás</p></li>
+      <li><p>V úvode sa Vám zobrazuje počet prístupov na našu stránku. PS: Čím väčšie číslo tým väčší Slovákom ste!</p></li>
+      <li><p>Podstránka Autoškola obsahuje 15 testov. <br>
+            Vyberte si test, ktorý chcete riešiť. Postupným klikaním na autíčka riešite danú križovatku. <br>
+            Niektoré križovatky majú viacero správnych odpovedí, keď by mali ísť autá súčasne, je jedno ktoré sa klikne ako prvé, 
+            po kliknutí na vozidlo by sa malo počkať kým prejde. <br>Keď má auto červenú tak križovatkou neprejde, nemá sa naň klikať.<br>
+            Pre zistenie správnej odpovede kliknite na tlačidlo <strong>Vyhodnotenie</strong>. 
+            Informácie o riešení danej križovatky sa zobrazia po kliknutí na tlačidlo <strong>Vysvetlenie</strong> pod križovatkou.
+            Kliknutím na tlačidlo <strong>Demo</strong> sa zobrazí správne riešenie.
+            Kliknutím na  tlačidlo <strong>Refresh</strong> sa križovatka resetuje.
+      </p></li>
+      <li><p>Podstránka Kalendár. Pomocou nej si viete zistiť, kto a kedy má meniny.</p></li>
+      <li><p> Podstránka O nás obsahuje biedne informácie o tvorcoch tohto webu. Užívať s rozumom!</p></li>
+    </ol>
+  </div>
+
+  <script src="scripts/main.js"></script>
+
+</body>
+
+</html>

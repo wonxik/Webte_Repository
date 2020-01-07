@@ -1,0 +1,26 @@
+td{
+    text-align: center;
+    font-weight: bold;
+}
+
+.nadpis{
+    font-size: 1.3em;
+}
+
+.okno{
+    background-color: #CD5C5C;
+    text-align: center;
+}
+
+th{
+    text-align: center;
+}
+
+h1{
+    padding-bottom: 50px;
+}
+
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+}
